@@ -17,6 +17,10 @@
 		F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4644221348BB00AE4515 /* CameraViewController.swift */; };
 		F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4645221348BB00AE4515 /* ColorTableViewController.swift */; };
 		F90B464A221348BB00AE4515 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */; };
+		F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */; };
+		F90B465222134BF000AE4515 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B464E22134BF000AE4515 /* CircleView.swift */; };
+		F90B465322134BF000AE4515 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B464F22134BF000AE4515 /* GridView.swift */; };
+		F90B465422134BF000AE4515 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465022134BF000AE4515 /* OverlayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		F90B4644221348BB00AE4515 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		F90B4645221348BB00AE4515 /* ColorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTableViewController.swift; sourceTree = "<group>"; };
 		F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorenerView.swift; sourceTree = "<group>"; };
+		F90B464E22134BF000AE4515 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		F90B464F22134BF000AE4515 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		F90B465022134BF000AE4515 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,10 @@
 		F90B46382213475B00AE4515 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				F90B464E22134BF000AE4515 /* CircleView.swift */,
+				F90B464F22134BF000AE4515 /* GridView.swift */,
+				F90B465022134BF000AE4515 /* OverlayView.swift */,
+				F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -183,12 +195,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F90B465222134BF000AE4515 /* CircleView.swift in Sources */,
 				F90B463F2213486B00AE4515 /* PhotoLiberaryManager.swift in Sources */,
 				F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */,
 				F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */,
+				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
 				F90B4647221348BB00AE4515 /* CustomCamera.swift in Sources */,
 				F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */,
+				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
 				F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */,
+				F90B465322134BF000AE4515 /* GridView.swift in Sources */,
 				F90B464A221348BB00AE4515 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
