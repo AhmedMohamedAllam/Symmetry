@@ -12,7 +12,6 @@
 		F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B463C2213486A00AE4515 /* MediaStore.swift */; };
 		F90B463F2213486B00AE4515 /* PhotoLiberaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B463D2213486B00AE4515 /* PhotoLiberaryManager.swift */; };
 		F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */; };
-		F90B4647221348BB00AE4515 /* CustomCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4643221348BB00AE4515 /* CustomCamera.swift */; };
 		F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4644221348BB00AE4515 /* CameraViewController.swift */; };
 		F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4645221348BB00AE4515 /* ColorTableViewController.swift */; };
 		F90B464A221348BB00AE4515 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */; };
@@ -32,7 +31,6 @@
 		F90B463C2213486A00AE4515 /* MediaStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStore.swift; sourceTree = "<group>"; };
 		F90B463D2213486B00AE4515 /* PhotoLiberaryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLiberaryManager.swift; sourceTree = "<group>"; };
 		F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewConfiguration.swift; sourceTree = "<group>"; };
-		F90B4643221348BB00AE4515 /* CustomCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCamera.swift; sourceTree = "<group>"; };
 		F90B4644221348BB00AE4515 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		F90B4645221348BB00AE4515 /* ColorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTableViewController.swift; sourceTree = "<group>"; };
 		F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -74,13 +72,13 @@
 		F90B4623221345FB00AE4515 /* Symmetry */ = {
 			isa = PBXGroup;
 			children = (
-				F90B465522134C2100AE4515 /* AppDelegate.swift */,
+				F90B46402213487500AE4515 /* PhotoLibraryManager */,
 				F90B463A2213476800AE4515 /* controller */,
-				F90B46392213476300AE4515 /* model */,
 				F90B46382213475B00AE4515 /* view */,
 				F90B46362213470000AE4515 /* Main.storyboard */,
 				F90B462D221345FC00AE4515 /* LaunchScreen.storyboard */,
 				F90B465722134C4F00AE4515 /* Assets.xcassets */,
+				F90B465522134C2100AE4515 /* AppDelegate.swift */,
 				F90B4630221345FC00AE4515 /* Info.plist */,
 			);
 			path = Symmetry;
@@ -97,22 +95,13 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		F90B46392213476300AE4515 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
 		F90B463A2213476800AE4515 /* controller */ = {
 			isa = PBXGroup;
 			children = (
 				F90B4644221348BB00AE4515 /* CameraViewController.swift */,
 				F90B4645221348BB00AE4515 /* ColorTableViewController.swift */,
-				F90B4643221348BB00AE4515 /* CustomCamera.swift */,
 				F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */,
 				F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */,
-				F90B46402213487500AE4515 /* PhotoLibraryManager */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -204,7 +193,6 @@
 				F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */,
 				F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */,
 				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
-				F90B4647221348BB00AE4515 /* CustomCamera.swift in Sources */,
 				F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */,
 				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
 				F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */,
