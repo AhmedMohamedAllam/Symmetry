@@ -45,11 +45,11 @@ import UIKit
             context.stroke(rect)
             
             //draw vertical lines
-            let columnWidth = Int(rect.width) / (numberOfColumns + 1)
+            let columnWidth = rect.width / CGFloat(numberOfColumns + 1)
             for column in 1...numberOfColumns {
                 var startPoint = CGPoint.zero
                 var endPoint = CGPoint.zero
-                startPoint.x = CGFloat(columnWidth * column)
+                startPoint.x = columnWidth * CGFloat(column)
                 startPoint.y = 0.0
                 endPoint.x = startPoint.x
                 endPoint.y = frame.size.height
@@ -58,12 +58,12 @@ import UIKit
             }
             
             //draw horizontal lines
-            let rowHeight = Int(rect.height) / (numberOfRows + 1)
+            let rowHeight = rect.height / CGFloat(numberOfRows + 1)
             for row in 1...numberOfRows {
                 var startPoint = CGPoint.zero
                 var endPoint = CGPoint.zero
                 startPoint.x = 0.0
-                startPoint.y = CGFloat(rowHeight * row)
+                startPoint.y = rowHeight * CGFloat(row)
                 endPoint.x = frame.size.width
                 endPoint.y = startPoint.y
                 let isDashed = canDrawDashLine(lines: numberOfRows, currentLine: row)
