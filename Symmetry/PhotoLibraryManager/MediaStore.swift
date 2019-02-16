@@ -10,7 +10,7 @@ import UIKit
 
 class MediaStore {
     
-    let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+    let appName = Constants.appName
     var libraryManager: PhotoLibraryManager!
     init(viewController: UIViewController) {
         libraryManager = PhotoLibraryManager()
