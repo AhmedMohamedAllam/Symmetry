@@ -104,4 +104,11 @@ import UIKit
         let center = (lines / 2) + 1
         return center == currentLine
     }
+    
+    private func cellNumberLabel(with number: Int) -> UILabel{
+        let label = UILabel(frame: frame)
+        label.text = "\(number)"
+        label.textColor = lineColor
+        return label
+    }
 }
