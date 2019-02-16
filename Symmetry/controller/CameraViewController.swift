@@ -15,7 +15,7 @@ class CameraViewController: UIViewController {
     let defaults = UserDefaults.standard
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var overlay: OverlayView!
-    var appName: String!
+    var appName: String = Constants.appName
     lazy var cameraRect: CGRect = {
         return getRectAfterOrientation(rect: self.imagePicker.view.frame)
     }()
@@ -28,7 +28,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          mediaStore = MediaStore(viewController: self)
-        appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+        
         overlay = OverlayView(delegate: self)
         addDidChangeOverlaySettingsObserver()
         addDidChangeOrientationObserver()
@@ -59,7 +59,7 @@ class CameraViewController: UIViewController {
                 }
                 else{
                     self.presentAlertController(with: self, title: "Camera access permission is denied!" ,
-                                                message: "Change (\(self.appName!)) all access permessions from settings first!")
+                                                message: "Change (\(self.appName)) all access permessions from settings first!")
                 }
             }
         }

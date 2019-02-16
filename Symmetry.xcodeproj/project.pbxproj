@@ -21,6 +21,7 @@
 		F90B465422134BF000AE4515 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465022134BF000AE4515 /* OverlayView.swift */; };
 		F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465522134C2100AE4515 /* AppDelegate.swift */; };
 		F90B465822134C4F00AE4515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F90B465722134C4F00AE4515 /* Assets.xcassets */; };
+		F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD9FA0221812BE00A64C49 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		F90B465022134BF000AE4515 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		F90B465522134C2100AE4515 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F90B465722134C4F00AE4515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9FD9FA0221812BE00A64C49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,13 +74,13 @@
 		F90B4623221345FB00AE4515 /* Symmetry */ = {
 			isa = PBXGroup;
 			children = (
-				F90B46402213487500AE4515 /* PhotoLibraryManager */,
+				F90B46402213487500AE4515 /* photoLibraryManager */,
 				F90B463A2213476800AE4515 /* controller */,
 				F90B46382213475B00AE4515 /* view */,
+				F9FD9FA2221812ED00A64C49 /* app */,
 				F90B46362213470000AE4515 /* Main.storyboard */,
 				F90B462D221345FC00AE4515 /* LaunchScreen.storyboard */,
 				F90B465722134C4F00AE4515 /* Assets.xcassets */,
-				F90B465522134C2100AE4515 /* AppDelegate.swift */,
 				F90B4630221345FC00AE4515 /* Info.plist */,
 			);
 			path = Symmetry;
@@ -106,13 +108,22 @@
 			path = controller;
 			sourceTree = "<group>";
 		};
-		F90B46402213487500AE4515 /* PhotoLibraryManager */ = {
+		F90B46402213487500AE4515 /* photoLibraryManager */ = {
 			isa = PBXGroup;
 			children = (
 				F90B463C2213486A00AE4515 /* MediaStore.swift */,
 				F90B463D2213486B00AE4515 /* PhotoLiberaryManager.swift */,
 			);
-			path = PhotoLibraryManager;
+			path = photoLibraryManager;
+			sourceTree = "<group>";
+		};
+		F9FD9FA2221812ED00A64C49 /* app */ = {
+			isa = PBXGroup;
+			children = (
+				F90B465522134C2100AE4515 /* AppDelegate.swift */,
+				F9FD9FA0221812BE00A64C49 /* Constants.swift */,
+			);
+			path = app;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +209,7 @@
 				F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */,
 				F90B465322134BF000AE4515 /* GridView.swift in Sources */,
 				F90B464A221348BB00AE4515 /* SettingsTableViewController.swift in Sources */,
+				F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
