@@ -21,6 +21,7 @@
 		F90B465422134BF000AE4515 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465022134BF000AE4515 /* OverlayView.swift */; };
 		F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465522134C2100AE4515 /* AppDelegate.swift */; };
 		F90B465822134C4F00AE4515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F90B465722134C4F00AE4515 /* Assets.xcassets */; };
+		F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */; };
 		F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD9FA0221812BE00A64C49 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		F90B465022134BF000AE4515 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		F90B465522134C2100AE4515 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F90B465722134C4F00AE4515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellNumber.swift; sourceTree = "<group>"; };
 		F9FD9FA0221812BE00A64C49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 			children = (
 				F90B464E22134BF000AE4515 /* CircleView.swift */,
 				F90B464F22134BF000AE4515 /* GridView.swift */,
+				F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */,
 				F90B465022134BF000AE4515 /* OverlayView.swift */,
 				F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */,
 			);
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */,
+				F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */,
 				F90B465222134BF000AE4515 /* CircleView.swift in Sources */,
 				F90B463F2213486B00AE4515 /* PhotoLiberaryManager.swift in Sources */,
 				F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */,

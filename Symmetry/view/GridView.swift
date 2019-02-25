@@ -11,6 +11,7 @@ import UIKit
 
 @IBDesignable class GridView: UIView {
     let defaults = UserDefaults.standard
+    var gridCellNumber: GridCellNumber!
     
     @IBInspectable var numberOfColumns: Int = 2
     @IBInspectable var numberOfRows: Int = 2
@@ -36,6 +37,7 @@ import UIKit
     
     override func draw(_ rect: CGRect) {
         configureViewFromUserDefaults()
+        gridCellNumber = GridCellNumber(columns: numberOfColumns, rows: numberOfRows)
         
         if let context = UIGraphicsGetCurrentContext() {
             
@@ -55,6 +57,7 @@ import UIKit
                 endPoint.y = frame.size.height
                 let isDashed = canDrawDashLine(lines: numberOfColumns, currentLine: column)
                 drawLine(with: context, startPoint: startPoint, endPoint: endPoint, isDashed: isDashed)
+               addHorizontalCellNumbers(index: column, x: startPoint.x, columnWidth: columnWidth)
             }
             
             //draw horizontal lines
@@ -68,6 +71,7 @@ import UIKit
                 endPoint.y = startPoint.y
                 let isDashed = canDrawDashLine(lines: numberOfRows, currentLine: row)
                 drawLine(with: context, startPoint: startPoint, endPoint: endPoint, isDashed: isDashed)
+                addVetictalCellNumbers(index: row, y: startPoint.y, rowHeight: rowHeight)
             }
         }
     }
@@ -105,10 +109,34 @@ import UIKit
         return center == currentLine
     }
     
-    private func cellNumberLabel(with number: Int) -> UILabel{
-        let label = UILabel(frame: frame)
+    private func cellLabel(with number: Int) -> UILabel{
+        let label = UILabel(frame: CGRect(x: 100, y: 0, width: 20, height: 20))
         label.text = "\(number)"
         label.textColor = lineColor
+        label.textAlignment = .center
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
+    
+    private func addHorizontalCellNumbers(index: Int, x: CGFloat, columnWidth: CGFloat){
+        let number = gridCellNumber.horizontalNumbers [index]
+        let label = cellLabel(with: number)
+        let xConstant = x + (columnWidth / 2.0)
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.leadingAnchor, constant: xConstant ),
+            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 4)
+            ])
+    }
+    
+    private func addVetictalCellNumbers(index: Int, y: CGFloat, rowHeight: CGFloat){
+        let number = gridCellNumber.verticalNumbers[index]
+        let label = cellLabel(with: number)
+        let yConstant = y + (rowHeight / 2.0)
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
+            label.centerYAnchor.constraint(equalTo: self.topAnchor, constant: yConstant)
+            ])
+    }
+    
 }

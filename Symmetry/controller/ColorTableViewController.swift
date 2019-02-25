@@ -48,7 +48,10 @@ class ColorTableViewController: UITableViewController {
         let colorString = colors[indexPath.row]
         UserDefaults.standard.set(colorString, forKey: SettingsKeys.lineColor.rawValue)
         previousSelectedIndexPath = indexPath
-
     }
 
+    private func postColorChanged(with color: UIColor){
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.colorChanged.rawValue), object: nil, userInfo: ["color": color])
+    }
 }
+

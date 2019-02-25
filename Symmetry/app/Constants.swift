@@ -15,3 +15,6 @@ struct Constants {
     static let cancel = "Cancel"
     static let caution = "Caution"
 }
+enum NotificationName:String {
+    case colorChanged
+}

@@ -54,7 +54,7 @@ class SettingsTableViewController: UITableViewController{
         configureSettingStartWithUserDefaults()
     }
  
-    
+
     // Configure previous settings and configure current setting views with them
     func configureSettingStartWithUserDefaults() {
         isGridSelected = defaults.bool(forKey: SettingsKeys.isGrid.rawValue)
