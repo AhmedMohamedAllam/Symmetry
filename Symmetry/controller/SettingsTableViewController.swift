@@ -15,7 +15,7 @@ enum SettingsKeys: String {
     case numberOfColumns
     case numberOfRows
     case numberOfCircles
-    case showCenterLines
+    case showCenteredDashedLines
     case showCrossLines
     case showDashedLines
 }
@@ -34,14 +34,17 @@ class SettingsTableViewController: UITableViewController{
     @IBOutlet weak var rowsStepper: UIStepper!
     @IBOutlet weak var circlesStepper: UIStepper!
     
-    @IBOutlet weak var centerLinesSwitch: UISwitch!
-    @IBOutlet weak var crossedLinesSwitch: UISwitch!
-    @IBOutlet weak var dashedLineSwitch: UISwitch!
-    @IBOutlet weak var lineColorView: RoundedCornerView!
+    @IBOutlet weak var gridCenterdDashedLineSwitch: UISwitch!
+    @IBOutlet weak var circleCenteredDashedLinesSwitch: UISwitch!
+    @IBOutlet weak var circleCrossedLinesSwitch: UISwitch!
+    
     @IBOutlet weak var lineWidthTextField: UITextField!
     @IBOutlet weak var columnsTextField: UITextField!
     @IBOutlet weak var rowsTextField: UITextField!
     @IBOutlet weak var circlesTextField: UITextField!
+    
+    @IBOutlet weak var lineColorView: RoundedCornerView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +70,9 @@ class SettingsTableViewController: UITableViewController{
         rows = rows > 0 ? rows : 3
         var circles = defaults.integer(forKey: SettingsKeys.numberOfCircles.rawValue)
         circles = circles > 0 ? circles : 5
-        let centeredLines = defaults.bool(forKey: SettingsKeys.showCenterLines.rawValue)
+        let centeredDashedLines = defaults.bool(forKey: SettingsKeys.showCenteredDashedLines.rawValue)
         let crossedLines = defaults.bool(forKey: SettingsKeys.showCrossLines.rawValue)
-        let dashedLines = defaults.bool(forKey: SettingsKeys.showDashedLines.rawValue)
+        let gridDashedLines = defaults.bool(forKey: SettingsKeys.showDashedLines.rawValue)
         
         lineWidthStepper.value = Double(lineWidth)
         columnsStepper.value = Double(columns)
@@ -80,9 +83,9 @@ class SettingsTableViewController: UITableViewController{
         columnsTextField.text = String(columns)
         rowsTextField.text = String(rows)
         circlesTextField.text = String(circles)
-        centerLinesSwitch.setOn(centeredLines , animated: false)
-        crossedLinesSwitch.setOn(crossedLines, animated: false)
-        dashedLineSwitch.setOn(dashedLines, animated: false)
+        circleCenteredDashedLinesSwitch.setOn(centeredDashedLines , animated: false)
+        circleCrossedLinesSwitch.setOn(crossedLines, animated: false)
+        gridCenterdDashedLineSwitch.setOn(gridDashedLines, animated: false)
     }
     
     @IBAction func doneSettingsAction(_ sender: UIBarButtonItem) {
@@ -92,9 +95,9 @@ class SettingsTableViewController: UITableViewController{
         let columns = Int(columnsTextField.text!)
         let rows = Int(rowsTextField.text!)
         let circles = Int(circlesTextField.text!)
-        let isCentered = centerLinesSwitch.isOn
-        let isCrossed = crossedLinesSwitch.isOn
-        let isDashed = dashedLineSwitch.isOn
+        let isCenteredDashedLined = circleCenteredDashedLinesSwitch.isOn
+        let isCrossed = circleCrossedLinesSwitch.isOn
+        let isGridDashedLines = gridCenterdDashedLineSwitch.isOn
         
         defaults.set(isGridSelected, forKey: SettingsKeys.isGrid.rawValue)
         defaults.setValue(color, forKey: SettingsKeys.lineColor.rawValue)
@@ -102,9 +105,9 @@ class SettingsTableViewController: UITableViewController{
         defaults.set(columns, forKey: SettingsKeys.numberOfColumns.rawValue)
         defaults.set(rows, forKey: SettingsKeys.numberOfRows.rawValue)
         defaults.set(circles, forKey: SettingsKeys.numberOfCircles.rawValue)
-        defaults.set(isCentered, forKey: SettingsKeys.showCenterLines.rawValue)
+        defaults.set(isCenteredDashedLined, forKey: SettingsKeys.showCenteredDashedLines.rawValue)
         defaults.set(isCrossed, forKey: SettingsKeys.showCrossLines.rawValue)
-        defaults.set(isDashed, forKey: SettingsKeys.showDashedLines.rawValue)
+        defaults.set(isGridDashedLines, forKey: SettingsKeys.showDashedLines.rawValue)
         // notify CameraViewController that done button was pressed
         NotificationCenter.default.post(name: NSNotification.Name.didChangeOverlaySettings, object: nil)
         //return to Camera

@@ -7,12 +7,16 @@
 //
 
 import UIKit
+protocol ColorTableViewControllerDelegate {
+    func didPickColor(_ color: String)
+}
 
 class ColorTableViewController: UITableViewController {
 
     let colors: [String] = ["white", "black", "red", "green", "blue", "yellow"]
     var lineColor: String!
     var previousSelectedIndexPath:IndexPath!
+    var delegate: ColorTableViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +50,8 @@ class ColorTableViewController: UITableViewController {
         let selectedRow = tableView.cellForRow(at: indexPath)
         selectedRow?.accessoryType = .checkmark
         let colorString = colors[indexPath.row]
-        UserDefaults.standard.set(colorString, forKey: SettingsKeys.lineColor.rawValue)
+        delegate?.didPickColor(colorString)
         previousSelectedIndexPath = indexPath
-    }
-
-    private func postColorChanged(with color: UIColor){
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.colorChanged.rawValue), object: nil, userInfo: ["color": color])
     }
 }
 

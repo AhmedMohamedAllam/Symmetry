@@ -296,7 +296,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Center Lines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-Qt-UhA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Centered Dashed Lines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-Qt-UhA">
                                                     <rect key="frame" x="20" y="11.333333333333336" width="313" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -357,13 +357,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="centerLinesSwitch" destination="pdu-VY-Aad" id="b0k-Wk-MNX"/>
+                        <outlet property="circleCenteredDashedLinesSwitch" destination="pdu-VY-Aad" id="b0k-Wk-MNX"/>
+                        <outlet property="circleCrossedLinesSwitch" destination="ACq-E2-rdZ" id="Iuz-TZ-LZM"/>
                         <outlet property="circlesStepper" destination="ZlY-Cg-Aw6" id="bIe-UN-yk7"/>
                         <outlet property="circlesTextField" destination="AOu-Vp-f8x" id="bRb-wo-7Vt"/>
                         <outlet property="columnsStepper" destination="aUk-TZ-ZIJ" id="V3B-Ef-lpC"/>
                         <outlet property="columnsTextField" destination="JfP-MN-upN" id="3Xd-kl-N4G"/>
-                        <outlet property="crossedLinesSwitch" destination="ACq-E2-rdZ" id="Iuz-TZ-LZM"/>
-                        <outlet property="dashedLineSwitch" destination="abn-YF-JAG" id="0KK-tD-qhA"/>
+                        <outlet property="gridCenterdDashedLineSwitch" destination="abn-YF-JAG" id="0KK-tD-qhA"/>
                         <outlet property="lineColorView" destination="TsH-u9-PmC" id="sil-Ja-eUY"/>
                         <outlet property="lineWidthStepper" destination="Q5B-ok-jIY" id="NtX-z1-rys"/>
                         <outlet property="lineWidthTextField" destination="ag9-oy-Ahs" id="ePe-0C-hDF"/>
@@ -373,7 +373,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBb-8Z-Svr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2012" y="-72"/>
+            <point key="canvasLocation" x="1968" y="-73"/>
         </scene>
         <!--Colors-->
         <scene sceneID="iZd-EQ-1iz">

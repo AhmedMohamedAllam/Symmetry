@@ -16,7 +16,7 @@ class CircleView: UIView{
     @IBInspectable var lineWidth: CGFloat = 1.0
     @IBInspectable var lineColor: UIColor = UIColor.white
     @IBInspectable var fillColor: UIColor = UIColor.clear
-    @IBInspectable var centeredLines: Bool = true
+    @IBInspectable var centeredDashedLines: Bool = true
     @IBInspectable var crossedLines: Bool = true
     @IBInspectable var transperency: CGFloat = 1.0 {
         didSet{
@@ -33,7 +33,7 @@ class CircleView: UIView{
         let numberOfCircles = defaults.integer(forKey: SettingsKeys.numberOfCircles.rawValue)
         self.numberOfCircles = numberOfCircles > 0 ? numberOfCircles : 5
         
-         centeredLines = defaults.bool(forKey: SettingsKeys.showCenterLines.rawValue)
+         centeredDashedLines = defaults.bool(forKey: SettingsKeys.showCenteredDashedLines.rawValue)
          crossedLines = defaults.bool(forKey: SettingsKeys.showCrossLines.rawValue)
         backgroundColor = UIColor.clear
     }
@@ -62,10 +62,8 @@ class CircleView: UIView{
                 context.addArc(center: center, radius: radius, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true)
                 context.strokePath()
             }
-            
-            if centeredLines{
-                drawCenterLines(with: context, to: rect)
-            }
+            drawCenterLines(with: context, to: rect, isDashed: centeredDashedLines)
+
             if crossedLines{
                 drawCrossLines(with: context, to: rect)
             }
@@ -73,13 +71,18 @@ class CircleView: UIView{
         
     }
     
-    func drawLine(with context: CGContext, startPoint: CGPoint, endPoint: CGPoint){
+    func drawLine(with context: CGContext, startPoint: CGPoint, endPoint: CGPoint , isDashed: Bool){
         context.move(to: startPoint)
         context.addLine(to: endPoint)
+        if isDashed{
+            context.setLineDash(phase: 3, lengths: [5,5])
+        }else{
+            context.setLineDash(phase: 0, lengths: [])
+        }
         context.strokePath()
     }
     
-    func drawCenterLines(with context: CGContext, to rect: CGRect) {
+    func drawCenterLines(with context: CGContext, to rect: CGRect, isDashed: Bool) {
         let width = rect.width
         let hieght = rect.height
         
@@ -92,7 +95,7 @@ class CircleView: UIView{
 
         verticatlEndPoint.x = width / 2
         verticatlEndPoint.y = hieght
-        drawLine(with: context, startPoint: verticatlStartPoint, endPoint: verticatlEndPoint)
+        drawLine(with: context, startPoint: verticatlStartPoint, endPoint: verticatlEndPoint, isDashed: isDashed)
         
         var horizontalStartPoint = CGPoint.zero
         var horizontalEndPoint = CGPoint.zero
@@ -104,7 +107,7 @@ class CircleView: UIView{
         
         horizontalEndPoint.x = width
         horizontalEndPoint.y = hieght / 2
-        drawLine(with: context, startPoint: horizontalStartPoint, endPoint: horizontalEndPoint)
+        drawLine(with: context, startPoint: horizontalStartPoint, endPoint: horizontalEndPoint, isDashed: isDashed)
     }
     
     func drawCrossLines(with context: CGContext, to rect: CGRect) {
@@ -117,7 +120,7 @@ class CircleView: UIView{
         //vertical Line start:(0, 0) end:(x, y)
         leftEndPoint.x = width
         leftEndPoint.y = hieght
-        drawLine(with: context, startPoint: leftStartPoint, endPoint: leftEndPoint)
+        drawLine(with: context, startPoint: leftStartPoint, endPoint: leftEndPoint, isDashed: false)
         
         var rightStartPoint = CGPoint.zero
         var rightEndPoint = CGPoint.zero
@@ -129,6 +132,6 @@ class CircleView: UIView{
         
         rightEndPoint.x = 0
         rightEndPoint.y = hieght
-        drawLine(with: context, startPoint: rightStartPoint, endPoint: rightEndPoint)
+        drawLine(with: context, startPoint: rightStartPoint, endPoint: rightEndPoint, isDashed: false)
     }
 }

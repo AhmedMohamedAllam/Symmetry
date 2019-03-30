@@ -21,6 +21,7 @@
 		F90B465422134BF000AE4515 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465022134BF000AE4515 /* OverlayView.swift */; };
 		F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465522134C2100AE4515 /* AppDelegate.swift */; };
 		F90B465822134C4F00AE4515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F90B465722134C4F00AE4515 /* Assets.xcassets */; };
+		F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C2224FB2C500C6BDEF /* Preferences.swift */; };
 		F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */; };
 		F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD9FA0221812BE00A64C49 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		F90B465022134BF000AE4515 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		F90B465522134C2100AE4515 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F90B465722134C4F00AE4515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F93B21C2224FB2C500C6BDEF /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellNumber.swift; sourceTree = "<group>"; };
 		F9FD9FA0221812BE00A64C49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +78,7 @@
 		F90B4623221345FB00AE4515 /* Symmetry */ = {
 			isa = PBXGroup;
 			children = (
+				F93B21C1224FB2B500C6BDEF /* Model */,
 				F90B46402213487500AE4515 /* photoLibraryManager */,
 				F90B463A2213476800AE4515 /* controller */,
 				F90B46382213475B00AE4515 /* view */,
@@ -118,6 +121,14 @@
 				F90B463D2213486B00AE4515 /* PhotoLiberaryManager.swift */,
 			);
 			path = photoLibraryManager;
+			sourceTree = "<group>";
+		};
+		F93B21C1224FB2B500C6BDEF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F93B21C2224FB2C500C6BDEF /* Preferences.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F9FD9FA2221812ED00A64C49 /* app */ = {
@@ -209,6 +220,7 @@
 				F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */,
 				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
 				F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */,
+				F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */,
 				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
 				F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */,
 				F90B465322134BF000AE4515 /* GridView.swift in Sources */,
