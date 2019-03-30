@@ -28,7 +28,6 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          mediaStore = MediaStore(viewController: self)
-        GridCellNumber(columns: 19, rows: 19)
         overlay = OverlayView(delegate: self)
         addDidChangeOverlaySettingsObserver()
         addDidChangeOrientationObserver()

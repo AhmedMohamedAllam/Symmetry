@@ -18,7 +18,7 @@ class ColorTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Colors"
          self.lineColor = UserDefaults.standard.string(forKey: SettingsKeys.lineColor.rawValue) ?? "white"
-        let colorIndex = colors.index(of: lineColor) ?? 0
+        let colorIndex = colors.firstIndex(of: lineColor) ?? 0
         previousSelectedIndexPath = IndexPath(row: colorIndex, section: 0)
     }
     
