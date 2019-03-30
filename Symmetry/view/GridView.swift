@@ -57,7 +57,7 @@ import UIKit
                 endPoint.y = frame.size.height
                 let isDashed = canDrawDashLine(lines: numberOfColumns, currentLine: column)
                 drawLine(with: context, startPoint: startPoint, endPoint: endPoint, isDashed: isDashed)
-               addHorizontalCellNumbers(index: column, x: startPoint.x, columnWidth: columnWidth)
+                addHorizontalCellNumbers(index: column, x: startPoint.x, columnWidth: columnWidth)
             }
             
             //draw horizontal lines
@@ -120,6 +120,10 @@ import UIKit
     }
     
     private func addHorizontalCellNumbers(index: Int, x: CGFloat, columnWidth: CGFloat){
+        let isGridNumbersShown = defaults.bool(forKey: SettingsKeys.showGridNumbers.rawValue)
+        guard isGridNumbersShown else {
+            return
+        }
         let number = gridCellNumber.horizontalNumbers [index]
         let label = cellLabel(with: number)
         let xConstant = x + (columnWidth / 2.0)
@@ -130,6 +134,10 @@ import UIKit
     }
     
     private func addVetictalCellNumbers(index: Int, y: CGFloat, rowHeight: CGFloat){
+        let isCircleNumbersShown = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
+        guard isCircleNumbersShown else {
+            return
+        }
         let number = gridCellNumber.verticalNumbers[index]
         let label = cellLabel(with: number)
         let yConstant = y + (rowHeight / 2.0)
