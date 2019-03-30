@@ -134,8 +134,8 @@ import UIKit
     }
     
     private func addVetictalCellNumbers(index: Int, y: CGFloat, rowHeight: CGFloat){
-        let isCircleNumbersShown = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
-        guard isCircleNumbersShown else {
+        let isGridNumbersShown = defaults.bool(forKey: SettingsKeys.showGridNumbers.rawValue)
+        guard isGridNumbersShown else {
             return
         }
         let number = gridCellNumber.verticalNumbers[index]

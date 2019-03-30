@@ -210,7 +210,7 @@ class SettingsTableViewController: UITableViewController{
         }else if section == 0 || section == 1{ // if first or second section return 2
             return 2
         }else{ //return 3 if circle or grid that is not hidden
-            return 3
+            return 4
         }
         
     }
