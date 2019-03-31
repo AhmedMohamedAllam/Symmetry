@@ -26,8 +26,7 @@ import UIKit
     func configureViewFromUserDefaults() {
         let lineWidth = CGFloat(defaults.integer(forKey: SettingsKeys.lineWidth.rawValue))
         self.lineWidth = lineWidth > 0 ? lineWidth : 1.0
-        let lineColor = defaults.string(forKey: SettingsKeys.lineColor.rawValue)
-        self.lineColor = OverlayViewConfiguration.getColor(from: lineColor)
+        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .white
         let columns = defaults.integer(forKey: SettingsKeys.numberOfColumns.rawValue)
         self.numberOfColumns = columns > 0 ? columns : 3
         let rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)

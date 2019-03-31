@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28CF5D81721DE44098E0998E /* Pods_Symmetry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F032B479C80C38CB6BE52EDF /* Pods_Symmetry.framework */; };
 		F90B462F221345FC00AE4515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F90B462D221345FC00AE4515 /* LaunchScreen.storyboard */; };
 		F90B46372213470000AE4515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F90B46362213470000AE4515 /* Main.storyboard */; };
 		F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B463C2213486A00AE4515 /* MediaStore.swift */; };
 		F90B463F2213486B00AE4515 /* PhotoLiberaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B463D2213486B00AE4515 /* PhotoLiberaryManager.swift */; };
 		F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */; };
 		F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4644221348BB00AE4515 /* CameraViewController.swift */; };
-		F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4645221348BB00AE4515 /* ColorTableViewController.swift */; };
 		F90B464A221348BB00AE4515 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */; };
 		F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */; };
 		F90B465222134BF000AE4515 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B464E22134BF000AE4515 /* CircleView.swift */; };
@@ -22,11 +22,16 @@
 		F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465522134C2100AE4515 /* AppDelegate.swift */; };
 		F90B465822134C4F00AE4515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F90B465722134C4F00AE4515 /* Assets.xcassets */; };
 		F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C2224FB2C500C6BDEF /* Preferences.swift */; };
+		F93B21C52250028000C6BDEF /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C42250028000C6BDEF /* ColorsViewController.swift */; };
+		F93B21CB2250E02800C6BDEF /* NSUserDefaults+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21CA2250E02800C6BDEF /* NSUserDefaults+UIColor.swift */; };
 		F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */; };
 		F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD9FA0221812BE00A64C49 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FCE8E7003B90CB07A9AE6CA /* Pods-Symmetry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Symmetry.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry.debug.xcconfig"; sourceTree = "<group>"; };
+		EDE3B00FBC04C1B9FFCC7C21 /* Pods-Symmetry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Symmetry.release.xcconfig"; path = "Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry.release.xcconfig"; sourceTree = "<group>"; };
+		F032B479C80C38CB6BE52EDF /* Pods_Symmetry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Symmetry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90B4621221345FB00AE4515 /* Symmetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Symmetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90B462E221345FC00AE4515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F90B4630221345FC00AE4515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,7 +40,6 @@
 		F90B463D2213486B00AE4515 /* PhotoLiberaryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLiberaryManager.swift; sourceTree = "<group>"; };
 		F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewConfiguration.swift; sourceTree = "<group>"; };
 		F90B4644221348BB00AE4515 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		F90B4645221348BB00AE4515 /* ColorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTableViewController.swift; sourceTree = "<group>"; };
 		F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorenerView.swift; sourceTree = "<group>"; };
 		F90B464E22134BF000AE4515 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
@@ -44,6 +48,8 @@
 		F90B465522134C2100AE4515 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F90B465722134C4F00AE4515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F93B21C2224FB2C500C6BDEF /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		F93B21C42250028000C6BDEF /* ColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
+		F93B21CA2250E02800C6BDEF /* NSUserDefaults+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+UIColor.swift"; sourceTree = "<group>"; };
 		F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellNumber.swift; sourceTree = "<group>"; };
 		F9FD9FA0221812BE00A64C49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,17 +59,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28CF5D81721DE44098E0998E /* Pods_Symmetry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		081720512DC5126DB062CD9C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0FCE8E7003B90CB07A9AE6CA /* Pods-Symmetry.debug.xcconfig */,
+				EDE3B00FBC04C1B9FFCC7C21 /* Pods-Symmetry.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		55969BFB860F9318CD4B2096 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F032B479C80C38CB6BE52EDF /* Pods_Symmetry.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F90B4618221345FB00AE4515 = {
 			isa = PBXGroup;
 			children = (
 				F90B4623221345FB00AE4515 /* Symmetry */,
 				F90B4622221345FB00AE4515 /* Products */,
+				081720512DC5126DB062CD9C /* Pods */,
+				55969BFB860F9318CD4B2096 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,9 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				F90B4644221348BB00AE4515 /* CameraViewController.swift */,
-				F90B4645221348BB00AE4515 /* ColorTableViewController.swift */,
 				F90B4646221348BB00AE4515 /* SettingsTableViewController.swift */,
 				F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */,
+				F93B21C42250028000C6BDEF /* ColorsViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -136,6 +162,7 @@
 			children = (
 				F90B465522134C2100AE4515 /* AppDelegate.swift */,
 				F9FD9FA0221812BE00A64C49 /* Constants.swift */,
+				F93B21CA2250E02800C6BDEF /* NSUserDefaults+UIColor.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -147,9 +174,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F90B4633221345FC00AE4515 /* Build configuration list for PBXNativeTarget "Symmetry" */;
 			buildPhases = (
+				086942E11A6E2568EA029280 /* [CP] Check Pods Manifest.lock */,
 				F90B461D221345FB00AE4515 /* Sources */,
 				F90B461E221345FB00AE4515 /* Frameworks */,
 				F90B461F221345FB00AE4515 /* Resources */,
+				225B9DEBF2D3D1DD16B3369E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,6 +236,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		086942E11A6E2568EA029280 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Symmetry-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		225B9DEBF2D3D1DD16B3369E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F90B461D221345FB00AE4515 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -216,13 +292,14 @@
 				F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */,
 				F90B465222134BF000AE4515 /* CircleView.swift in Sources */,
 				F90B463F2213486B00AE4515 /* PhotoLiberaryManager.swift in Sources */,
-				F90B4649221348BB00AE4515 /* ColorTableViewController.swift in Sources */,
 				F90B4648221348BB00AE4515 /* CameraViewController.swift in Sources */,
 				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
 				F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */,
 				F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */,
 				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
+				F93B21C52250028000C6BDEF /* ColorsViewController.swift in Sources */,
 				F90B463E2213486B00AE4515 /* MediaStore.swift in Sources */,
+				F93B21CB2250E02800C6BDEF /* NSUserDefaults+UIColor.swift in Sources */,
 				F90B465322134BF000AE4515 /* GridView.swift in Sources */,
 				F90B464A221348BB00AE4515 /* SettingsTableViewController.swift in Sources */,
 				F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */,
@@ -361,6 +438,7 @@
 		};
 		F90B4634221345FC00AE4515 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FCE8E7003B90CB07A9AE6CA /* Pods-Symmetry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -381,6 +459,7 @@
 		};
 		F90B4635221345FC00AE4515 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDE3B00FBC04C1B9FFCC7C21 /* Pods-Symmetry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

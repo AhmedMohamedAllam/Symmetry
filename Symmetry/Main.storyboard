@@ -119,7 +119,7 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsH-u9-PmC" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
                                                     <rect key="frame" x="335.33333333333331" y="5.3333333333333321" width="32.666666666666686" height="33"/>
-                                                    <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="10"/>
@@ -141,7 +141,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="pwW-6U-MUG" kind="show" id="SDM-fI-2JC"/>
+                                            <segue destination="csV-hm-icL" kind="presentation" identifier="colorPopUpSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="ORT-Er-dUg"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -430,161 +430,54 @@
             </objects>
             <point key="canvasLocation" x="1968" y="-73"/>
         </scene>
-        <!--Colors-->
-        <scene sceneID="iZd-EQ-1iz">
+        <!--Color-->
+        <scene sceneID="BZu-Wz-Wxb">
             <objects>
-                <tableViewController title="Colors" id="pwW-6U-MUG" customClass="ColorTableViewController" customModule="Symmetry" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="vhj-9F-wtS">
+                <viewController modalPresentationStyle="overCurrentContext" id="csV-hm-icL" customClass="ColorsViewController" customModule="Symmetry" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="DKG-Ix-RFG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Choose Color" id="nKQ-Hg-Vix">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="white" id="Ctb-pF-t5E">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ctb-pF-t5E" id="fEO-fx-aL7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaC-Oa-8WB" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3.3333333333333321" width="37" height="37"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="VaC-Oa-8WB" secondAttribute="height" multiplier="1:1" id="IqI-6y-6ze"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="VaC-Oa-8WB" firstAttribute="centerY" secondItem="fEO-fx-aL7" secondAttribute="centerY" id="KXF-wd-nh3"/>
-                                                <constraint firstItem="VaC-Oa-8WB" firstAttribute="height" secondItem="fEO-fx-aL7" secondAttribute="height" multiplier="0.85" id="R9k-Rq-5yj"/>
-                                                <constraint firstItem="VaC-Oa-8WB" firstAttribute="leading" secondItem="fEO-fx-aL7" secondAttribute="leading" constant="16" id="bGR-2e-niE"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="black" id="lXL-zp-Jrz">
-                                        <rect key="frame" x="0.0" y="99.333333333333343" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lXL-zp-Jrz" id="s9D-Qu-ujQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwE-BG-75M" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3.3333333333333321" width="37" height="37"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="pwE-BG-75M" secondAttribute="height" multiplier="1:1" id="2P0-Wn-ote"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="pwE-BG-75M" firstAttribute="height" secondItem="s9D-Qu-ujQ" secondAttribute="height" multiplier="0.85" id="OrR-oU-VX2"/>
-                                                <constraint firstItem="pwE-BG-75M" firstAttribute="centerY" secondItem="s9D-Qu-ujQ" secondAttribute="centerY" id="hO7-qZ-V2O"/>
-                                                <constraint firstItem="pwE-BG-75M" firstAttribute="leading" secondItem="s9D-Qu-ujQ" secondAttribute="leading" constant="16" id="vJj-uv-jTS"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="red" id="hAX-Xc-qXf">
-                                        <rect key="frame" x="0.0" y="143.33333333333334" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hAX-Xc-qXf" id="mPR-IB-nHj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVX-LB-phe" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3.3333333333333321" width="37" height="37"/>
-                                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="fVX-LB-phe" secondAttribute="height" multiplier="1:1" id="hD8-0r-3x0"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="fVX-LB-phe" firstAttribute="centerY" secondItem="mPR-IB-nHj" secondAttribute="centerY" id="6fa-RB-m7d"/>
-                                                <constraint firstItem="fVX-LB-phe" firstAttribute="height" secondItem="mPR-IB-nHj" secondAttribute="height" multiplier="0.85" id="Bp0-81-09J"/>
-                                                <constraint firstItem="fVX-LB-phe" firstAttribute="leading" secondItem="mPR-IB-nHj" secondAttribute="leading" constant="16" id="rd5-lh-ptn"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="green" id="Z1j-ff-XrC">
-                                        <rect key="frame" x="0.0" y="187.33333333333334" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z1j-ff-XrC" id="yZI-9C-57q">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EnK-vY-1wJ" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3.3333333333333321" width="37" height="37"/>
-                                                    <color key="backgroundColor" red="0.50466168209999995" green="1" blue="0.49389417479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="EnK-vY-1wJ" secondAttribute="height" multiplier="1:1" id="yfc-bn-gcq"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="EnK-vY-1wJ" firstAttribute="leading" secondItem="yZI-9C-57q" secondAttribute="leading" constant="16" id="ZBr-3N-j7F"/>
-                                                <constraint firstItem="EnK-vY-1wJ" firstAttribute="centerY" secondItem="yZI-9C-57q" secondAttribute="centerY" id="aei-29-Zql"/>
-                                                <constraint firstItem="EnK-vY-1wJ" firstAttribute="height" secondItem="yZI-9C-57q" secondAttribute="height" multiplier="0.85" id="pXT-2d-06i"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="blue" id="O3M-Dl-JuA">
-                                        <rect key="frame" x="0.0" y="231.33333333333334" width="414" height="44.000000000000028"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O3M-Dl-JuA" id="a83-Rk-RIM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQ1-7w-ocV" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3.3333333333333321" width="37" height="37"/>
-                                                    <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="GQ1-7w-ocV" secondAttribute="height" multiplier="1:1" id="6cs-3D-c5d"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="GQ1-7w-ocV" firstAttribute="centerY" secondItem="a83-Rk-RIM" secondAttribute="centerY" id="5gm-Tf-bSj"/>
-                                                <constraint firstItem="GQ1-7w-ocV" firstAttribute="leading" secondItem="a83-Rk-RIM" secondAttribute="leading" constant="16" id="Z1m-B9-Ng2"/>
-                                                <constraint firstItem="GQ1-7w-ocV" firstAttribute="height" secondItem="a83-Rk-RIM" secondAttribute="height" multiplier="0.85" id="duU-G7-iYm"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="yellow" id="jKc-gi-o1W">
-                                        <rect key="frame" x="0.0" y="275.33333333333337" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jKc-gi-o1W" id="BNB-I3-Zfk">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wK-eT-jqt" customClass="RoundedCornerView" customModule="Symmetry" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3.3333333333333321" width="37" height="37"/>
-                                                    <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="3wK-eT-jqt" secondAttribute="height" multiplier="1:1" id="SE9-FD-a6h"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="3wK-eT-jqt" firstAttribute="height" secondItem="BNB-I3-Zfk" secondAttribute="height" multiplier="0.85" id="DCG-Zi-tZt"/>
-                                                <constraint firstItem="3wK-eT-jqt" firstAttribute="centerY" secondItem="BNB-I3-Zfk" secondAttribute="centerY" id="cR1-fZ-uZU"/>
-                                                <constraint firstItem="3wK-eT-jqt" firstAttribute="leading" secondItem="BNB-I3-Zfk" secondAttribute="leading" constant="16" id="r3S-Jl-zTJ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="pwW-6U-MUG" id="MDf-LP-cOi"/>
-                            <outlet property="delegate" destination="pwW-6U-MUG" id="V8l-o3-BEQ"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QAB-Nc-q6x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nz2-oB-DTX">
+                                <rect key="frame" x="57" y="218" width="300" height="300"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="IWl-Yl-qJL"/>
+                                    <constraint firstAttribute="width" constant="300" id="QD8-fJ-lBo"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k00-Nj-Lll">
+                                <rect key="frame" x="332" y="193" width="50" height="50"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="bXR-aY-zwB"/>
+                                    <constraint firstAttribute="height" constant="50" id="hUo-uC-kld"/>
+                                </constraints>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="closePressed:" destination="csV-hm-icL" eventType="touchUpInside" id="A7e-6H-MTg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nz2-oB-DTX" firstAttribute="centerX" secondItem="DKG-Ix-RFG" secondAttribute="centerX" id="Azf-HG-E7V"/>
+                            <constraint firstItem="k00-Nj-Lll" firstAttribute="top" secondItem="nz2-oB-DTX" secondAttribute="top" constant="-25" id="GDx-fX-L5Z"/>
+                            <constraint firstItem="k00-Nj-Lll" firstAttribute="trailing" secondItem="nz2-oB-DTX" secondAttribute="trailing" constant="25" id="ect-6t-6B6"/>
+                            <constraint firstItem="nz2-oB-DTX" firstAttribute="centerY" secondItem="DKG-Ix-RFG" secondAttribute="centerY" id="sed-JC-Ovh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KAo-Nz-9DT"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Color" id="NCc-0x-Qbx"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <connections>
+                        <outlet property="closeButton" destination="k00-Nj-Lll" id="HV1-Uz-kN6"/>
+                        <outlet property="colorPickerView" destination="nz2-oB-DTX" id="zhe-i2-wRl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qwO-UZ-qpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="-73"/>
+            <point key="canvasLocation" x="2797" y="-73"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="3EK-Ah-njE">
@@ -621,4 +514,7 @@
             <point key="canvasLocation" x="487" y="-72"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close" width="16" height="16"/>
+    </resources>
 </document>

@@ -61,13 +61,19 @@ class SettingsTableViewController: UITableViewController{
         configureSettingStartWithUserDefaults()
     }
  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "colorPopUpSegue", let colorVC = segue.destination as? ColorsViewController{
+            colorVC.delegate = self
+            colorVC.previousColor = lineColorView.backgroundColor!
+        }
+    }
 
     // Configure previous settings and configure current setting views with them
     func configureSettingStartWithUserDefaults() {
         isGridSelected = defaults.bool(forKey: SettingsKeys.isGrid.rawValue)
         var lineWidth = defaults.integer(forKey: SettingsKeys.lineWidth.rawValue)
         lineWidth = lineWidth > 0 ? lineWidth : 1
-        let lineColor = defaults.string(forKey: SettingsKeys.lineColor.rawValue) ?? "white"
+        let lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue)
         var columns = defaults.integer(forKey: SettingsKeys.numberOfColumns.rawValue)
         columns = columns > 0 ? columns : 3
         var rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)
@@ -85,7 +91,7 @@ class SettingsTableViewController: UITableViewController{
         rowsStepper.value = Double(rows)
         circlesStepper.value = Double(circles)
         lineWidthTextField.text = String(lineWidth)
-        lineColorView.backgroundColor = lineColor.color()
+        lineColorView.backgroundColor = lineColor
         columnsTextField.text = String(columns)
         rowsTextField.text = String(rows)
         circlesTextField.text = String(circles)
@@ -99,7 +105,7 @@ class SettingsTableViewController: UITableViewController{
     @IBAction func doneSettingsAction(_ sender: UIBarButtonItem) {
         //get Current settings before return and save to defaults
         let lineWidth = Int(lineWidthTextField.text!)
-        let color = defaults.string(forKey: SettingsKeys.lineColor.rawValue) ?? "white"
+        let color = lineColorView.backgroundColor
         let columns = Int(columnsTextField.text!)
         let rows = Int(rowsTextField.text!)
         let circles = Int(circlesTextField.text!)
@@ -110,7 +116,7 @@ class SettingsTableViewController: UITableViewController{
         let isCircleNumbersShown = circleNumbersSwitch.isOn
         
         defaults.set(isGridSelected, forKey: SettingsKeys.isGrid.rawValue)
-        defaults.setValue(color, forKey: SettingsKeys.lineColor.rawValue)
+        defaults.set(color, forKey: SettingsKeys.lineColor.rawValue)
         defaults.set(lineWidth, forKey: SettingsKeys.lineWidth.rawValue)
         defaults.set(columns, forKey: SettingsKeys.numberOfColumns.rawValue)
         defaults.set(rows, forKey: SettingsKeys.numberOfRows.rawValue)
@@ -120,6 +126,7 @@ class SettingsTableViewController: UITableViewController{
         defaults.set(isGridDashedLines, forKey: SettingsKeys.showDashedLines.rawValue)
         defaults.set(isGridNumbersShown, forKey: SettingsKeys.showGridNumbers.rawValue)
         defaults.set(isCircleNumbersShown, forKey: SettingsKeys.showCircleNumbers.rawValue)
+        
         // notify CameraViewController that done button was pressed
         NotificationCenter.default.post(name: NSNotification.Name.didChangeOverlaySettings, object: nil)
         //return to Camera
@@ -233,3 +240,9 @@ class SettingsTableViewController: UITableViewController{
     }
 }
 
+
+extension SettingsTableViewController: ColorsViewControllerDelegate{
+    func didPickColor(_ color: UIColor) {
+        lineColorView.backgroundColor = color
+    }
+}
