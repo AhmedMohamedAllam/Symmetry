@@ -487,25 +487,25 @@
         <!--Camera View Controller-->
         <scene sceneID="6EY-FB-2VU">
             <objects>
-                <viewController id="Zwc-sb-GWL" customClass="CameraViewController" customModule="StoryMateCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zwc-sb-GWL" customClass="CameraViewController" customModule="Symmetry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1tU-4x-bwo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4D-mL-5nI" userLabel="Capture view">
-                                <rect key="frame" x="0.0" y="588.66666666666663" width="414" height="147.33333333333337"/>
+                                <rect key="frame" x="0.0" y="611" width="414" height="125"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsK-lH-C3z" userLabel="photo/video view" customClass="PhotoOrVideoView" customModule="StoryMateCamera" customModuleProvider="target">
-                                        <rect key="frame" x="147" y="4" width="120" height="39"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsK-lH-C3z" userLabel="photo/video view" customClass="PhotoOrVideoView" customModule="Symmetry" customModuleProvider="target">
+                                        <rect key="frame" x="147" y="4" width="120" height="36.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIDEO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ia8-5h-UGG" userLabel="video">
-                                                <rect key="frame" x="0.0" y="10.666666666666742" width="44.666666666666664" height="18"/>
+                                                <rect key="frame" x="0.0" y="9" width="44.666666666666664" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHOTO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbP-vW-j8e" userLabel="photo">
-                                                <rect key="frame" x="68.666666666666657" y="0.0" width="51.333333333333343" height="39"/>
+                                                <rect key="frame" x="68.666666666666657" y="0.0" width="51.333333333333343" height="36.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="1" green="0.7805586457" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -526,21 +526,21 @@
                                         </connections>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-mV-9T9" customClass="SwiftyCamButton" customModule="SwiftyCam">
-                                        <rect key="frame" x="163" y="42.999999999999993" width="88" height="88.333333333333314"/>
+                                        <rect key="frame" x="172.66666666666666" y="40.333333333333378" width="68.666666666666657" height="68.666666666666686"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6pD-mV-9T9" secondAttribute="height" multiplier="1:1" id="Yc4-16-ycZ"/>
                                         </constraints>
                                         <state key="normal" image="capture btn"/>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQF-nY-0K1" userLabel="Record Button">
-                                        <rect key="frame" x="163" y="42.999999999999993" width="88" height="88.333333333333314"/>
+                                        <rect key="frame" x="172.66666666666666" y="40.333333333333378" width="68.666666666666657" height="68.666666666666686"/>
                                         <state key="normal" image="record btn"/>
                                         <connections>
                                             <action selector="recordButtonPressed:" destination="Zwc-sb-GWL" eventType="touchUpInside" id="UNd-A5-lG9"/>
                                         </connections>
                                     </button>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvW-Mz-0yO">
-                                        <rect key="frame" x="358" y="67.333333333333371" width="40" height="40"/>
+                                        <rect key="frame" x="358" y="54.666666666666629" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="2VX-Bg-ftk"/>
                                             <constraint firstAttribute="height" constant="40" id="Ev6-Ob-JEq"/>
@@ -550,14 +550,14 @@
                                             <action selector="switchCameraPressed:" destination="Zwc-sb-GWL" eventType="touchUpInside" id="uxP-Sb-xVZ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gallery" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-LV-9Yi">
-                                        <rect key="frame" x="16" y="50.333333333333378" width="73.666666666666671" height="73.666666666666686"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gallery" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-LV-9Yi">
+                                        <rect key="frame" x="16" y="49.666666666666629" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="NrQ-LV-9Yi" secondAttribute="height" multiplier="1:1" id="795-fF-ze6"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B00-KL-29z">
-                                        <rect key="frame" x="16" y="50.333333333333378" width="73.666666666666671" height="73.666666666666686"/>
+                                        <rect key="frame" x="16" y="49.666666666666629" width="50" height="50"/>
                                         <connections>
                                             <action selector="openGalleryPressed:" destination="Zwc-sb-GWL" eventType="touchUpInside" id="SJj-gU-ekk"/>
                                         </connections>
@@ -566,9 +566,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="aQF-nY-0K1" firstAttribute="height" secondItem="6pD-mV-9T9" secondAttribute="height" id="1Ju-Va-Vh9"/>
-                                    <constraint firstItem="NrQ-LV-9Yi" firstAttribute="height" secondItem="K4D-mL-5nI" secondAttribute="height" multiplier="0.5" id="2ti-s9-G1q"/>
+                                    <constraint firstItem="NrQ-LV-9Yi" firstAttribute="height" secondItem="K4D-mL-5nI" secondAttribute="height" multiplier="0.4" id="2ti-s9-G1q"/>
                                     <constraint firstItem="zsK-lH-C3z" firstAttribute="top" secondItem="K4D-mL-5nI" secondAttribute="top" constant="4" id="5rs-3L-gfD"/>
-                                    <constraint firstItem="6pD-mV-9T9" firstAttribute="height" secondItem="K4D-mL-5nI" secondAttribute="height" multiplier="0.6" id="6pR-rZ-njJ"/>
+                                    <constraint firstItem="6pD-mV-9T9" firstAttribute="height" secondItem="K4D-mL-5nI" secondAttribute="height" multiplier="0.55" id="6pR-rZ-njJ"/>
                                     <constraint firstItem="6pD-mV-9T9" firstAttribute="centerY" secondItem="NrQ-LV-9Yi" secondAttribute="centerY" id="AzW-vC-IKx"/>
                                     <constraint firstItem="6pD-mV-9T9" firstAttribute="centerX" secondItem="K4D-mL-5nI" secondAttribute="centerX" id="DRz-9P-y4c"/>
                                     <constraint firstItem="zsK-lH-C3z" firstAttribute="centerX" secondItem="K4D-mL-5nI" secondAttribute="centerX" id="EuA-LK-FgT"/>
@@ -589,7 +589,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jji-tS-AXr">
                                 <rect key="frame" x="0.0" y="20" width="414" height="46"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1SV-xZ-a3z" userLabel="counterView" customClass="RecordCounterView" customModule="StoryMateCamera" customModuleProvider="target">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1SV-xZ-a3z" userLabel="counterView" customClass="RecordCounterView" customModule="Symmetry" customModuleProvider="target">
                                         <rect key="frame" x="164.33333333333334" y="12.666666666666666" width="85.333333333333343" height="20.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyu-e7-z3J">
@@ -669,7 +669,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="jji-tS-AXr" secondAttribute="trailing" id="0Ub-Nr-a2O"/>
-                            <constraint firstItem="K4D-mL-5nI" firstAttribute="height" secondItem="1tU-4x-bwo" secondAttribute="height" multiplier="0.2" id="1EO-Wm-fSv"/>
+                            <constraint firstItem="K4D-mL-5nI" firstAttribute="height" secondItem="1tU-4x-bwo" secondAttribute="height" multiplier="0.17" id="1EO-Wm-fSv"/>
                             <constraint firstItem="jji-tS-AXr" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="F5V-Hc-CWW"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="bottom" secondItem="K4D-mL-5nI" secondAttribute="bottom" id="PB1-07-mhC"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="K4D-mL-5nI" secondAttribute="trailing" id="Sz9-P4-Onu"/>
@@ -716,12 +716,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="capture btn" width="256" height="256"/>
+        <image name="capture btn" width="512" height="512"/>
         <image name="close" width="16" height="16"/>
-        <image name="flash off" width="64" height="64"/>
+        <image name="flash off" width="100" height="100"/>
         <image name="gallery" width="64" height="64"/>
-        <image name="record btn" width="84" height="84"/>
+        <image name="record btn" width="512" height="512"/>
         <image name="settings" width="21.333333969116211" height="21.333333969116211"/>
-        <image name="switch cam" width="64" height="64"/>
+        <image name="switch cam" width="90" height="90"/>
     </resources>
 </document>
