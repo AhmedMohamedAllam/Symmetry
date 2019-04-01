@@ -102,7 +102,11 @@ class SettingsTableViewController: UITableViewController{
         circleNumbersSwitch.setOn(circleNumbers, animated: false)
     }
     
-    @IBAction func doneSettingsAction(_ sender: UIBarButtonItem) {
+    @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didPressDone(_ sender: UIBarButtonItem) {
         //get Current settings before return and save to defaults
         let lineWidth = Int(lineWidthTextField.text!)
         let color = lineColorView.backgroundColor
@@ -130,7 +134,7 @@ class SettingsTableViewController: UITableViewController{
         // notify CameraViewController that done button was pressed
         NotificationCenter.default.post(name: NSNotification.Name.didChangeOverlaySettings, object: nil)
         //return to Camera
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     

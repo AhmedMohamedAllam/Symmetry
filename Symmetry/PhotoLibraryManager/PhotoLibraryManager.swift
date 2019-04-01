@@ -9,40 +9,15 @@ import Foundation
 import Photos
 
 class PhotoLibraryManager: NSObject {
-    fileprivate weak var currentVC: UIViewController?
     
-    public func checkAuthorisationStatus(vc: UIViewController?, completion: @escaping ((Bool) -> Void)) {
-        currentVC = vc
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-        case .authorized:
-            completion(true)
-        case .denied:
-            completion(false)
-            self.settingsAlert(title: Constants.caution, message: Constants.photoLibraryMessage)
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == PHAuthorizationStatus.authorized{
-                    completion(true)
-                }else{
-                    completion(false)
-                    self.settingsAlert(title: Constants.caution, message: Constants.photoLibraryMessage)
-                }
-            })
-        case .restricted:
-            completion(false)
-            self.settingsAlert(title: Constants.caution, message: Constants.photoLibraryMessage)
-        }
-    }
-    
-    public func containsAlbum(albumName: String) -> Bool {
-       let fetchResult = createAlbumFetchResult(albumName)
+    func containsAlbum(albumName: String) -> Bool {
+        let fetchResult = createAlbumFetchResult(albumName)
         return fetchResult.count > 0
     }
     
     
     //MARK: - Create folder, save delete etc.
-    public func makeAlbum(albumName: String){
+    func makeAlbum(albumName: String){
         let fetchResult = createAlbumFetchResult(albumName)
         if fetchResult.count == 0 {
             var albumPlaceholder: PHObjectPlaceholder?
@@ -61,7 +36,7 @@ class PhotoLibraryManager: NSObject {
     }
     
     //Saves photo and returns it's identifier
-    public func savePhotoToAlbum(albumName: String, photo:UIImage, completion: ((_ identifier: String?, _ error: Error?) -> Void)?){
+    func savePhotoToAlbum(albumName: String, photo:UIImage, completion: ((_ identifier: String?, _ error: Error?) -> Void)?){
         let fetchResult = createAlbumFetchResult(albumName)
         if fetchResult.count > 0{
             let assetCollection = fetchResult.firstObject
@@ -85,7 +60,7 @@ class PhotoLibraryManager: NSObject {
     }
     
     //Saves photo and returns it's identifier
-    public func saveVideoToAlbum(albumName: String, videoUrl:URL, completion: ((_ identifier: String?, _ error: Error?) -> Void)?){
+    func saveVideoToAlbum(albumName: String, videoUrl:URL, completion: ((_ identifier: String?, _ error: Error?) -> Void)?){
         let fetchResult = createAlbumFetchResult(albumName)
         if fetchResult.count > 0{
             let assetCollection = fetchResult.firstObject
@@ -111,11 +86,50 @@ class PhotoLibraryManager: NSObject {
         }
     }
     
+    private func allAssetsFetchResult() -> PHFetchResult<PHAsset>{
+        let options = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
+        options.includeAssetSourceTypes = [.typeCloudShared, .typeiTunesSynced, .typeUserLibrary]
+        let fetchResult = PHAsset.fetchAssets(with: options)
+        return fetchResult
+    }
     
     
+    private func getPhoto(with asset: PHAsset, result: @escaping (_ image: UIImage?) -> Void){
+        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: nil, resultHandler: {(image: UIImage?, _: [AnyHashable: Any]?) -> Void in
+            result(image)
+        })
+    }
     
+    private func getVideo(with asset: PHAsset, result: @escaping (_ asset: AVAsset?) -> Void){
+        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { (avAsset, avAudioMix, _) in
+            result(avAsset)
+        }
+    }
+   
     
-    public func getPhoto(with identifier: String, mode: PHImageRequestOptionsDeliveryMode) -> UIImage? {
+    func getLatestAsset(completion: @escaping (_ image: UIImage?, _ videoAsset: AVAsset?) -> Void){
+        let options = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
+        options.includeAssetSourceTypes = [.typeCloudShared, .typeiTunesSynced, .typeUserLibrary]
+        let fetchResult = PHAsset.fetchAssets(with: options)
+        let latestAsset = fetchResult[0]
+        
+        if latestAsset.mediaType == .image{
+            getPhoto(with: latestAsset) { (image) in
+                completion(image, nil)
+            }
+        }else if latestAsset.mediaType == .video{
+            getVideo(with: latestAsset) { (videoAsset) in
+                completion(nil, videoAsset)
+            }
+        }else{
+            completion(nil, nil)
+        }
+        
+    }
+    
+    func getPhoto(with identifier: String, mode: PHImageRequestOptionsDeliveryMode) -> UIImage? {
         var savedImage: UIImage?
         let fetchResult = createPhotoFetchResult(identifier)
         if fetchResult.count > 0 {
@@ -131,7 +145,7 @@ class PhotoLibraryManager: NSObject {
         return savedImage
     }
     
-    public func containsPhoto(identifier: String) -> Bool {
+    func containsPhoto(identifier: String) -> Bool {
         let fetchResult = createPhotoFetchResult(identifier)
         if fetchResult.count > 0 {
             if let asset = fetchResult.firstObject {
@@ -148,7 +162,7 @@ class PhotoLibraryManager: NSObject {
         return false
     }
     
-    public func deletePhoto(identifier: String) {
+    func deletePhoto(identifier: String) {
         let fetchResult = createPhotoFetchResult(identifier)
         if fetchResult.count > 0 {
             PHPhotoLibrary.shared().performChanges({
@@ -168,31 +182,14 @@ class PhotoLibraryManager: NSObject {
         return fetchResult
     }
     
-    private func createPhotoFetchResult(_ identifier: String) -> PHFetchResult<PHAsset>{
+    private func createPhotoFetchResult(_ identifier: String? = nil) -> PHFetchResult<PHAsset>{
         let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "localIdentifier = %@", identifier)
+        if let identifier = identifier{
+            fetchOptions.predicate = NSPredicate(format: "localIdentifier = %@", identifier)
+        }
         let fetchResult = PHAsset.fetchAssets(with: fetchOptions)
         return fetchResult
     }
     
-    
-    //MARK: - SETTINGS ALERT
-    func settingsAlert(title: String, message: String){
-        let settingsAlert = UIAlertController (title: title , message: message, preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: Constants.settings, style: .destructive) { (_) -> Void in
-            let settingsUrl = NSURL(string:UIApplication.openSettingsURLString)
-            if let url = settingsUrl {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-                } else {
-                    // Fallback on earlier versions
-                }
-            }
-        }
-        let cancelAction = UIAlertAction(title: Constants.cancel, style: .default, handler: nil)
-        settingsAlert.addAction(cancelAction)
-        settingsAlert.addAction(settingsAction)
-        currentVC?.present(settingsAlert , animated: true, completion: nil)
-    }
 }
 

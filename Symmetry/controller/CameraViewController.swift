@@ -1,292 +1,270 @@
 //
-//  MainViewController.swift
-//  Symmetry
+//  ViewController.swift
+//  Camera
 //
-//  Created by Allam on 11/5/18.
-//  Copyright © 2018 Allam. All rights reserved.
+//  Created by Ahmed Allam on 2/17/19.
+//  Copyright © 2019 TheD. GmbH. All rights reserved.
 //
 
 import UIKit
-import AVFoundation
 import Photos
+import AVKit
+import SwiftyCam
 
-class CameraViewController: UIViewController {
+protocol CameraViewControllerDelegate {
+    func camera(didTakePhoto photo: UIImage)
+    func camera(didRecordVideo url: URL)
+}
+
+class CameraViewController: SwiftyCamViewController {
     
-    let defaults = UserDefaults.standard
-    var imagePicker: UIImagePickerController = UIImagePickerController()
-    var overlay: OverlayView!
-    var appName: String = Constants.appName
-    lazy var cameraRect: CGRect = {
-        return getRectAfterOrientation(rect: self.imagePicker.view.frame)
-    }()
+    @IBOutlet weak var flashButton: UIButton!
+    @IBOutlet weak var captureButton: SwiftyCamButton!
+    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var galleryButton: UIButton!
+    @IBOutlet weak var switchCameraButton: UIButton!
+    @IBOutlet weak var galleryImage: UIImageView!
+    @IBOutlet weak var recordCounterView: RecordCounterView!
+    @IBOutlet var captureView: UIView!
+    @IBOutlet var photoVideoView: PhotoOrVideoView!
+    @IBOutlet weak var photoVideoViewCenterConstraint: NSLayoutConstraint!
     
-    var didCapture = false
-    var previousOrientation: UIDeviceOrientation = .portrait
-    var mediaStore: MediaStore!
+    override var prefersStatusBarHidden: Bool{
+        return true
+    }
     
+    private var mediaStore: MediaStore!
+    private var photoLibraryPicker: PhotoLibraryPickerProtocol?
+    var leftSwipe: UISwipeGestureRecognizer!
+    var rightSwipe: UISwipeGestureRecognizer!
+    var delegate: CameraViewControllerDelegate?
+    
+    private var isVideo: Bool = false {
+        didSet{
+            UIView.animate(withDuration: 1) { [unowned self] in
+                self.updateCameraViews(self.isVideo)
+            }
+        }
+    }
+    private var isRecording: Bool = false{
+        didSet{
+            updateUIWhileRecording(isRecording)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         mediaStore = MediaStore(viewController: self)
-        overlay = OverlayView(delegate: self)
-        addDidChangeOverlaySettingsObserver()
-        addDidChangeOrientationObserver()
-        openCamera()
+        photoLibraryPicker = PhotoLibraryPicker(viewController: self)
+        mediaStore = MediaStore(viewController: self)
+        photoLibraryPicker!.delegate = self
+        photoLibraryPicker?.pickLatestThumbnail()
+        captureButton.delegate = self
+        setupCamera()
+        addSwipeGestureRecognizers()
+        updatePhotoVideoViewCenter(isVideo)
+        photoVideoView.delegate = self
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-        didCapture = false
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        super.viewWillAppear(animated)
         
     }
     
-    @objc func settingButtonAction(_ sender: UIButton!) {
-        let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController{
-            imagePicker.pushViewController(settingsViewController, animated: true)
-        }
-    }
-   
     
-    //    MARK- Camera Configuration
-    func openCamera() {
-        setupCamera()
-        requestCameraAuthorization {[unowned self] granted in
-            DispatchQueue.main.async {
-                if granted {
-                    self.present(self.imagePicker, animated: false, completion: nil)
-                }
-                else{
-                    self.presentAlertController(with: self, title: "Camera access permission is denied!" ,
-                                                message: "Change (\(self.appName)) all access permessions from settings first!")
-                }
-            }
+    //MARK:- IBActions
+    @IBAction func openGalleryPressed(_ sender: Any) {
+        UIApplication.shared.open(URL(string:"photos-redirect://")!)
+    }
+    
+    @IBAction func flashPressed(_ sender: Any) {
+        let isFlashEnabled = (flashMode != .off)
+        updateFlash(isOn: isFlashEnabled)
+    }
+    
+    @IBAction func recordButtonPressed(_ sender: Any) {
+        if isRecording{
+            stopRecording()
+        }else{
+            startRecording()
         }
+        isRecording = !isRecording
+    }
+    
+    
+    @IBAction func switchCameraPressed(_ sender: Any) {
+        //swiftyCam method
+        switchCamera()
+    }
+    
+    //MARK:- Helper Methods
+    
+    private func updatePhotoVideoViewCenter(_ isVideo: Bool){
+        let centerConstant = photoVideoView.calculateCenter(isVideo: isVideo)
+        photoVideoViewCenterConstraint.constant = centerConstant
+    }
+    
+    private func startRecording(){
+        startVideoRecording()
+        recordCounterView.startCounter()
+    }
+    
+    private func stopRecording(){
+        stopVideoRecording()
+        recordCounterView.stopCounter()
     }
     
     private func setupCamera(){
-       
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-        }else{
-            presentAlertController(with: self, title:"Device Error" , message: "Device doesn't contain a camera!")
-            return
-        }
-        
-        if let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: imagePicker.sourceType){
-            imagePicker.mediaTypes = availableMediaTypes
-        }
-        let rect = getRectAfterOrientation(rect: cameraRect)
-        let overlayView = overlay.getOverlayView(frame: rect)
-        
-        imagePicker.cameraOverlayView = overlayView
-        imagePicker.delegate = self
-        
-        removeOverlayAfterTakePhoto(from: imagePicker)
-        addOverlayAfterRejectPhoto(from: imagePicker)
+        cameraDelegate = self
+        flashEnabled = false
+        allowAutoRotate = true
+        shouldUseDeviceOrientation = true
+        swipeToZoom = false
+        removeLongPressGestureRecognizer()
     }
     
-    
-
-    
-    //Mark: - Camera Authorization
-    private func requestCameraAuthorization(_ completion : @escaping (Bool) -> Void){
-        let mediaType = AVMediaType.video
-        
-        
-        
-        if !isCameraAuthorized(for: mediaType){
-            requestCameraAuthorization(for: mediaType, onComplete: completion)
-        }else if !isPhotoLiberaryAuthorized(){
-            requestPhotoLiberaryAuthorization(onComplete: completion)
-        }else{
-            completion(true)
-        }
-        
+    private func updateCameraViews(_ isVideo: Bool){
+        captureButton.isHidden = isVideo
+        recordButton.isHidden = !isVideo
+        recordCounterView.isHidden = !isVideo
+        updatePhotoVideoViewCenter(isVideo)
     }
     
-    private func isCameraAuthorized(for mediaType: AVMediaType) -> Bool {
-        let authStatus = AVCaptureDevice.authorizationStatus(for: mediaType)
-        return authStatus == .authorized
+    private func updateUIWhileRecording(_ isRecording: Bool){
+        galleryImage.isHidden = isRecording
+        galleryButton.isHidden = isRecording
+        flashButton.isHidden = isRecording
+        switchCameraButton.isHidden = isRecording
+        photoVideoView.isHidden = isRecording
     }
     
-    private func isPhotoLiberaryAuthorized() -> Bool {
-        let authStatus = PHPhotoLibrary.authorizationStatus()
-        return authStatus == .authorized
-    }
-    
-    private func requestCameraAuthorization(for mediaType: AVMediaType,onComplete comletion : @escaping (Bool) -> Void){
-        AVCaptureDevice.requestAccess(for: mediaType) { comletion($0)}
-    }
-    private func requestPhotoLiberaryAuthorization(onComplete completion : @escaping (Bool) -> Void){
-        PHPhotoLibrary.requestAuthorization{
-            completion($0 == PHAuthorizationStatus.authorized)
+    private func removeLongPressGestureRecognizer(){
+        if let recoginzers = captureButton.gestureRecognizers{
+            let longPress = recoginzers[1]
+            captureButton.removeGestureRecognizer(longPress)
         }
     }
     
-    //    MARK:- Notification Observers
-    private func removeOverlayAfterTakePhoto(from imagePicker: UIImagePickerController){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.didCaptureItem, object:nil, queue:nil, using: {[weak self] note in
-            self?.didCapture = true
-            imagePicker.cameraOverlayView = nil
-        })
+    private func updateFlash(isOn: Bool){
+        self.flashEnabled = !isOn
+        let flashImage = flashEnabled ? UIImage(named: "flash on") : UIImage(named: "flash off")
+        flashButton.setImage(flashImage, for: .normal)
     }
     
-    private func addOverlayAfterRejectPhoto(from imagePicker: UIImagePickerController){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.didRejectItem, object:nil, queue:nil, using: {[weak self] note in
-            guard let self = self else {return}
-            self.didCapture = false
-            imagePicker.cameraOverlayView = self.overlay.getOverlayView(frame: self.cameraRect)
-        })
+    private func didCapture(photo: UIImage){
+        mediaStore.savePhoto(photo)
+        galleryImage.image = photo
     }
     
-    private func addDidChangeOverlaySettingsObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.didChangeOverlaySettings(_:)), name: NSNotification.Name.didChangeOverlaySettings, object: nil)
-    }
-    
-    private func addDidChangeOrientationObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(didChangeOrientation(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
-    
-    // will be executed if user tab done button in settings
-    @objc func didChangeOverlaySettings(_ notification:Notification){
-        updateOverlayView()
-    }
-    
-    @objc func didChangeOrientation(_ notification:Notification){
-        if !didCapture{
-            updateOverlayView()
+    private func didRecord(videoUrl url: URL){
+        mediaStore.saveVideo(with: url)
+        if let snapshot = Utiles.videoSnapshot(from: url){
+            galleryImage.image = snapshot
         }
     }
     
-    private func isPortrait() -> Bool{
-        var isPortrait: Bool {
-            let orientation = UIDevice.current.orientation
-            switch orientation {
-            case .portrait, .portraitUpsideDown:
-                 previousOrientation = .portrait
-                return true
-            case .landscapeLeft, .landscapeRight:
-                previousOrientation = .landscapeLeft
-                return false
-            default: // unknown or faceUp or faceDown
-//                guard let window = self.view.window else { return false }
-//                return window.frame.size.width < window.frame.size.height
-                if previousOrientation == .portrait{
-                    return true
-                }else{
-                    return false
-                }
-            }
-        }
-       
-        return isPortrait
-    }
     
-    
-    private func getRectAfterOrientation(rect: CGRect) -> CGRect{
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-        // It's an iPhone
-            return rect
-        case .pad:
-            var width: CGFloat = 0.0
-            var height: CGFloat = 0.0
-            
-            if isPortrait(){
-                width = (rect.width > rect.height) ? rect.height : rect.width
-                height = (rect.width > rect.height) ? rect.width : rect.height
-            }else{
-                width = (rect.width > rect.height) ? rect.width : rect.height
-                height = (rect.width > rect.height) ? rect.height : rect.width
-            }
-            return CGRect(x: 0.0, y: 0.0, width: width, height: height)
-        default:
-            return rect
-        }
+    //MARK:- Gesture recognizer
+    func addSwipeGestureRecognizers(){
+        leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        leftSwipe.delegate = self
+        leftSwipe.direction = .left
+        self.captureView.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(leftSwipe)
         
+        rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        rightSwipe.delegate = self
+        rightSwipe.direction = .right
+        self.captureView.addGestureRecognizer(rightSwipe)
+        super.view.addGestureRecognizer(rightSwipe)
     }
     
-    
-    private func updateOverlayView(){
-        let deviceHasCamera = UIImagePickerController.isSourceTypeAvailable(.camera)
-        guard deviceHasCamera else {
-            return
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            isVideo = true
         }
-        let rect = getRectAfterOrientation(rect: cameraRect)
-        let overlayView =  overlay.getOverlayView(frame: rect)
-        imagePicker.cameraOverlayView = overlayView
+        else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            isVideo = false
+        }
     }
     
 }
 
-extension CameraViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+
+extension CameraViewController: PhotoLibraryPickerDelegate{
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
+    func didPickImage(image: UIImage) {
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        didCapture = false
-        // Local variable inserted by Swift 4.2 migrator.
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-        
-        
-        // To handle image
-        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
-            mediaStore.savePhoto(image)
-        }
-        // To handle video
-        if let videoUrl = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? NSURL{
-            mediaStore.saveVideo(with: videoUrl as URL)
-//            UISaveVideoAtPathToSavedPhotosAlbum(videoPath, self, nil, nil)
-        }
-        
-        picker.dismiss(animated: false) {
-            self.didCapture = false
-            self.openCamera()
+    func didPickVedio(url: URL) {
+    }
+    
+    func latestThumbnail(image: UIImage?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.galleryImage.image = image
         }
     }
     
-    
-   
-    
-    private func presentAlertController(
-        with viewController: UIViewController,
-        title: String,
-        message: String
-        ) {
-        let alertController = getAlertWith(title: title, message: message)
-        viewController.present(alertController, animated: true, completion: nil)
+}
+
+extension CameraViewController:  SwiftyCamViewControllerDelegate{
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
+        didCapture(photo: photo)
     }
     
-    private func getAlertWith(title: String, message: String) -> UIAlertController{
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
-        return alertController
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didBeginRecordingVideo camera: SwiftyCamViewController.CameraSelection) {
+        // Called when startVideoRecording() is called
+        recordButton.setImage(#imageLiteral(resourceName: "stop btn"), for: .normal)
+    }
+    
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFinishRecordingVideo camera: SwiftyCamViewController.CameraSelection) {
+        // Called when stopVideoRecording() is called
+        recordButton.setImage(#imageLiteral(resourceName: "record btn"), for: .normal)
+        
+    }
+    
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFinishProcessVideoAt url: URL) {
+        // Called when stopVideoRecording() is called and the video is finished processing
+        // Returns a URL in the temporary directory where video is stored
+        didRecord(videoUrl: url)
+    }
+    
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFocusAtPoint point: CGPoint) {
+        // Called when a user initiates a tap gesture on the preview layer
+        // Will only be called if tapToFocus = true
+        // Returns a CGPoint of the tap location on the preview layer
+    }
+    
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didChangeZoomLevel zoom: CGFloat) {
+        // Called when a user initiates a pinch gesture on the preview layer
+        // Will only be called if pinchToZoomn = true
+        // Returns a CGFloat of the current zoom level
+    }
+    
+    func swiftyCam(_ swiftyCam: SwiftyCamViewController, didSwitchCameras camera: SwiftyCamViewController.CameraSelection) {
+        // Called when user switches between cameras
+        // Returns current camera selection
+    }
+    
+}
+
+extension CameraViewController: PhotoVideoViewDelegate{
+    func didTapVideo() {
+        isVideo = true
+    }
+    
+    func didTapPhoto() {
+        isVideo = false
     }
 }
 
-extension CameraViewController: OverLayViewDelegate{
-    func didPressSettingsButton() {
-        let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
-        let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController
-        imagePicker.pushViewController(settingsViewController!, animated: true)
+// UIGestureRecognizerDelegate methods from parent
+extension CameraViewController{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if gestureRecognizer is UISwipeGestureRecognizer  {
+             return !isRecording
+        }
+        return true
     }
-}
-
-extension Notification.Name{
-    static let didChangeOverlaySettings = NSNotification.Name(rawValue: "settingsDidChange")
-    static let didCaptureItem =  NSNotification.Name(rawValue: "_UIImagePickerControllerUserDidCaptureItem")
-    static let didRejectItem =  NSNotification.Name(rawValue: "_UIImagePickerControllerUserDidRejectItem")
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }
