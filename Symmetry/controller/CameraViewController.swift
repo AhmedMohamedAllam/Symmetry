@@ -18,9 +18,11 @@ protocol CameraViewControllerDelegate {
 
 class CameraViewController: SwiftyCamViewController {
     
+    @IBOutlet weak var overlayViewContainer: UIView!
     @IBOutlet weak var flashButton: UIButton!
     @IBOutlet weak var captureButton: SwiftyCamButton!
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var switchCameraButton: UIButton!
     @IBOutlet weak var galleryImage: UIImageView!
@@ -63,15 +65,36 @@ class CameraViewController: SwiftyCamViewController {
         addSwipeGestureRecognizers()
         updatePhotoVideoViewCenter(isVideo)
         photoVideoView.delegate = self
+        updateOverlayView()
     }
     
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "settingsSegue",
+            let settingsNavigationController = segue.destination as? UINavigationController,
+            let settingsVC = settingsNavigationController.viewControllers.first as? SettingsTableViewController{
+            settingsVC.delegate = self
+        }
+    }
+    
+    @objc func updateOverlayView(){
+        let overlayView =  OverlayView.getOverlayView(frame: overlayViewContainer.bounds)
+        overlayView.removeFromSuperview()
+        overlayViewContainer.addSubview(overlayView)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: overlayViewContainer.topAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: overlayViewContainer.trailingAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: overlayViewContainer.bottomAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: overlayViewContainer.leadingAnchor)
+            ])
+        overlayViewContainer.layoutSubviews()
+    }
     
     //MARK:- IBActions
     @IBAction func openGalleryPressed(_ sender: Any) {
@@ -117,8 +140,7 @@ class CameraViewController: SwiftyCamViewController {
     
     private func setupCamera(){
         cameraDelegate = self
-        flashEnabled = false
-        allowAutoRotate = true
+        flashMode = .off
         shouldUseDeviceOrientation = true
         swipeToZoom = false
         removeLongPressGestureRecognizer()
@@ -137,6 +159,7 @@ class CameraViewController: SwiftyCamViewController {
         flashButton.isHidden = isRecording
         switchCameraButton.isHidden = isRecording
         photoVideoView.isHidden = isRecording
+        settingsButton.isHidden = isRecording
     }
     
     private func removeLongPressGestureRecognizer(){
@@ -266,5 +289,13 @@ extension CameraViewController{
              return !isRecording
         }
         return true
+    }
+}
+
+//will be called after user update settings
+extension CameraViewController: SettingsTableViewControllerDelegate{
+    func didChangeSettings(){
+        overlayViewContainer.subviews.first?.removeFromSuperview()
+        updateOverlayView()
     }
 }

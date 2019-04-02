@@ -22,14 +22,13 @@ enum SettingsKeys: String {
     case showCircleNumbers
 }
 
+protocol SettingsTableViewControllerDelegate {
+    func didChangeSettings()
+}
 
 class SettingsTableViewController: UITableViewController{
     static let storyboardID = "settingsTableViewController"
-    private final let gridSectionID = 2
-    private final let circleSectionID = 3
     
-    let defaults = UserDefaults.standard
-    var isGridSelected: Bool = false
     
     @IBOutlet weak var lineWidthStepper: UIStepper!
     @IBOutlet weak var columnsStepper: UIStepper!
@@ -49,6 +48,12 @@ class SettingsTableViewController: UITableViewController{
     
     @IBOutlet weak var lineColorView: RoundedCornerView!
 
+    private final let gridSectionID = 2
+    private final let circleSectionID = 3
+    
+    let defaults = UserDefaults.standard
+    var isGridSelected: Bool = false
+    var delegate: SettingsTableViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +137,7 @@ class SettingsTableViewController: UITableViewController{
         defaults.set(isCircleNumbersShown, forKey: SettingsKeys.showCircleNumbers.rawValue)
         
         // notify CameraViewController that done button was pressed
-        NotificationCenter.default.post(name: NSNotification.Name.didChangeOverlaySettings, object: nil)
+        delegate?.didChangeSettings()
         //return to Camera
         dismiss(animated: true, completion: nil)
     }

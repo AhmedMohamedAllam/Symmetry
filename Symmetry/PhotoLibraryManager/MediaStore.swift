@@ -12,9 +12,10 @@ class MediaStore {
     
     let appName = Constants.appName
     var libraryManager: PhotoLibraryManager!
+    
     init(viewController: UIViewController) {
         libraryManager = PhotoLibraryManager()
-        libraryManager.checkAuthorisationStatus(vc: viewController) { [weak self] granted in
+        PhotoLibraryAuth.checkAuthorisationStatus(vc: viewController) { [weak self] granted in
             if granted{
                 self?.createAppAlbum()
             }

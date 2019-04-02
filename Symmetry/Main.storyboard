@@ -586,6 +586,10 @@
                                     <constraint firstItem="zvW-Mz-0yO" firstAttribute="centerY" secondItem="NrQ-LV-9Yi" secondAttribute="centerY" id="wKj-MR-AF7"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-jK-6nD" userLabel="overlay view">
+                                <rect key="frame" x="0.0" y="66" width="414" height="545"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jji-tS-AXr">
                                 <rect key="frame" x="0.0" y="20" width="414" height="46"/>
                                 <subviews>
@@ -649,7 +653,7 @@
                                         <state key="normal" image="settings"/>
                                         <connections>
                                             <action selector="flashPressed:" destination="Zwc-sb-GWL" eventType="touchUpInside" id="EZh-eD-Rlg"/>
-                                            <segue destination="EEI-tU-gEt" kind="presentation" id="h5l-gN-SdY"/>
+                                            <segue destination="EEI-tU-gEt" kind="presentation" identifier="settingsSegue" id="h5l-gN-SdY"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -670,9 +674,13 @@
                         <constraints>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="jji-tS-AXr" secondAttribute="trailing" id="0Ub-Nr-a2O"/>
                             <constraint firstItem="K4D-mL-5nI" firstAttribute="height" secondItem="1tU-4x-bwo" secondAttribute="height" multiplier="0.17" id="1EO-Wm-fSv"/>
+                            <constraint firstItem="DZt-jK-6nD" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="5oy-55-ERj"/>
                             <constraint firstItem="jji-tS-AXr" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="F5V-Hc-CWW"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="bottom" secondItem="K4D-mL-5nI" secondAttribute="bottom" id="PB1-07-mhC"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="K4D-mL-5nI" secondAttribute="trailing" id="Sz9-P4-Onu"/>
+                            <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="DZt-jK-6nD" secondAttribute="trailing" id="TWZ-Dt-J6h"/>
+                            <constraint firstItem="K4D-mL-5nI" firstAttribute="top" secondItem="DZt-jK-6nD" secondAttribute="bottom" id="bnd-n6-uej"/>
+                            <constraint firstItem="DZt-jK-6nD" firstAttribute="top" secondItem="jji-tS-AXr" secondAttribute="bottom" id="ds1-Vw-Lct"/>
                             <constraint firstItem="jji-tS-AXr" firstAttribute="top" secondItem="mw5-As-5Fv" secondAttribute="top" id="eeF-ep-khI"/>
                             <constraint firstItem="K4D-mL-5nI" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="m9L-4Z-Shx"/>
                         </constraints>
@@ -685,6 +693,7 @@
                         <outlet property="flashButton" destination="hmF-wi-YBp" id="ZBr-rK-cJq"/>
                         <outlet property="galleryButton" destination="B00-KL-29z" id="mIu-2c-36d"/>
                         <outlet property="galleryImage" destination="NrQ-LV-9Yi" id="1Ie-cT-qDs"/>
+                        <outlet property="overlayViewContainer" destination="DZt-jK-6nD" id="LVT-Ad-GqW"/>
                         <outlet property="photoVideoView" destination="zsK-lH-C3z" id="mrE-Wy-HXb"/>
                         <outlet property="photoVideoViewCenterConstraint" destination="EuA-LK-FgT" id="Z6r-sJ-idE"/>
                         <outlet property="recordButton" destination="aQF-nY-0K1" id="QuS-PF-Hxe"/>
