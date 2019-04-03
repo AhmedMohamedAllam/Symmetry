@@ -3,7 +3,7 @@
 //  Camera
 //
 //  Created by Ahmed Allam on 2/17/19.
-//  Copyright © 2019 TheD. GmbH. All rights reserved.
+//  Copyright © 2019 Allam All rights reserved.
 //
 
 import UIKit

@@ -586,7 +586,7 @@
                                     <constraint firstItem="zvW-Mz-0yO" firstAttribute="centerY" secondItem="NrQ-LV-9Yi" secondAttribute="centerY" id="wKj-MR-AF7"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-jK-6nD" userLabel="overlay view">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-jK-6nD" userLabel="overlay view">
                                 <rect key="frame" x="0.0" y="66" width="414" height="545"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -728,7 +728,7 @@
         <image name="capture btn" width="512" height="512"/>
         <image name="close" width="16" height="16"/>
         <image name="flash off" width="100" height="100"/>
-        <image name="gallery" width="64" height="64"/>
+        <image name="gallery" width="128" height="128"/>
         <image name="record btn" width="512" height="512"/>
         <image name="settings" width="21.333333969116211" height="21.333333969116211"/>
         <image name="switch cam" width="90" height="90"/>
