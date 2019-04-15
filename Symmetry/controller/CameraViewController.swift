@@ -32,8 +32,9 @@ class CameraViewController: SwiftyCamViewController {
     @IBOutlet weak var photoVideoView: PhotoOrVideoView!
     @IBOutlet weak var photoVideoViewCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var overlayViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var overlayViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var overlayViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var captureButtonsViewHeightConstraint: NSLayoutConstraint!
 
     override var prefersStatusBarHidden: Bool{
         return true
@@ -139,28 +140,29 @@ class CameraViewController: SwiftyCamViewController {
         switch type {
         case .square:
             updateCptureAndHeaderViewColor(with: .black)
-            let topConstant = ((screenWidth - screenHeight) * 0.5)
+            let topConstant = ((screenHeight - screenWidth) * 0.5)
             let bottomConstant = topConstant
-            overlayViewBottomConstraint.isActive = false
-            overlayViewTopConstraint.constant = -topConstant
+            overlayViewTopConstraint.constant = topConstant
             overlayViewBottomConstraint.constant = bottomConstant
-            overlayViewHeightConstraint.constant = screenWidth
+            headerViewHeightConstraint.constant = topConstant
+            captureButtonsViewHeightConstraint.constant = bottomConstant
         case .photo:
             // header view ratio is 0.08 from the height of the screen
             updateCptureAndHeaderViewColor(with: UIColor.black.withAlphaComponent(0.5))
             let topConstant = screenHeight * 0.08
-            let heightConstant = screenHeight * 0.75
             let bottomConstant = screenHeight * 0.17
             overlayViewTopConstraint.constant = topConstant
             overlayViewBottomConstraint.constant = bottomConstant
-            overlayViewHeightConstraint.constant = heightConstant
+            headerViewHeightConstraint.constant = topConstant
+            captureButtonsViewHeightConstraint.constant = bottomConstant
         case .video:
+            let topConstant = screenHeight * 0.08
+            let bottomConstant = screenHeight * 0.17
             updateCptureAndHeaderViewColor(with: .clear)
-//            overlayViewBottomConstraint.isActive = true
             overlayViewTopConstraint.constant = 0
             overlayViewBottomConstraint.constant = 0
-            overlayViewHeightConstraint.constant = screenHeight
-            print("video choosed")
+            headerViewHeightConstraint.constant = topConstant
+            captureButtonsViewHeightConstraint.constant = bottomConstant
         }
         
     }
@@ -198,7 +200,7 @@ class CameraViewController: SwiftyCamViewController {
         recordButton.isHidden = !isVideo
         recordCounterView.isHidden = !isVideo
         updatePhotoVideoViewCenter(isVideo)
-        let type: ImageType = isVideo ? .video : .photo
+        let type: ImageType = isVideo ? .square : .photo
         UpdateCameraType(with: type)
     }
     

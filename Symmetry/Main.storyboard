@@ -492,6 +492,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-jK-6nD" userLabel="overlay view">
+                                <rect key="frame" x="0.0" y="59" width="414" height="552"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4D-mL-5nI" userLabel="Capture view">
                                 <rect key="frame" x="0.0" y="611" width="414" height="125"/>
                                 <subviews>
@@ -576,12 +580,12 @@
                                     <constraint firstItem="aQF-nY-0K1" firstAttribute="width" secondItem="6pD-mV-9T9" secondAttribute="width" id="Kdv-3E-a5P"/>
                                     <constraint firstItem="B00-KL-29z" firstAttribute="centerX" secondItem="NrQ-LV-9Yi" secondAttribute="centerX" id="Nsj-Q3-x58"/>
                                     <constraint firstAttribute="bottom" secondItem="aQF-nY-0K1" secondAttribute="bottom" constant="16" id="PbA-f7-lq3"/>
-                                    <constraint firstItem="zsK-lH-C3z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="K4D-mL-5nI" secondAttribute="top" constant="18.329999999999998" id="Syw-K2-BgM"/>
                                     <constraint firstItem="B00-KL-29z" firstAttribute="width" secondItem="NrQ-LV-9Yi" secondAttribute="width" id="WAN-Ku-Eg8"/>
                                     <constraint firstItem="6pD-mV-9T9" firstAttribute="top" secondItem="zsK-lH-C3z" secondAttribute="bottom" constant="4" id="ZKX-ii-KEW"/>
                                     <constraint firstItem="aQF-nY-0K1" firstAttribute="centerY" secondItem="NrQ-LV-9Yi" secondAttribute="centerY" id="eNA-Vh-G4f"/>
                                     <constraint firstItem="B00-KL-29z" firstAttribute="height" secondItem="NrQ-LV-9Yi" secondAttribute="height" id="gIp-Or-zPg"/>
                                     <constraint firstItem="aQF-nY-0K1" firstAttribute="centerX" secondItem="6pD-mV-9T9" secondAttribute="centerX" id="iZS-B5-VoP"/>
+                                    <constraint firstAttribute="height" constant="125" id="kiJ-dw-RHA"/>
                                     <constraint firstItem="B00-KL-29z" firstAttribute="centerY" secondItem="NrQ-LV-9Yi" secondAttribute="centerY" id="lhx-yz-Vve"/>
                                     <constraint firstItem="NrQ-LV-9Yi" firstAttribute="leading" secondItem="K4D-mL-5nI" secondAttribute="leading" constant="16" id="mfo-Af-JVt"/>
                                     <constraint firstItem="zvW-Mz-0yO" firstAttribute="centerY" secondItem="NrQ-LV-9Yi" secondAttribute="centerY" id="wKj-MR-AF7"/>
@@ -657,19 +661,12 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="1SV-xZ-a3z" firstAttribute="centerY" secondItem="hmF-wi-YBp" secondAttribute="centerY" id="GYd-fS-OSi"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WxW-xI-8Is" secondAttribute="bottom" constant="15" id="ZJi-ir-nNH"/>
+                                    <constraint firstAttribute="height" constant="59" id="SNC-Hn-inm"/>
                                     <constraint firstItem="WxW-xI-8Is" firstAttribute="top" secondItem="jji-tS-AXr" secondAttribute="top" constant="14" id="doD-bP-ECf"/>
                                     <constraint firstItem="1SV-xZ-a3z" firstAttribute="centerX" secondItem="jji-tS-AXr" secondAttribute="centerX" id="eyc-ZU-Ol2"/>
                                     <constraint firstAttribute="trailing" secondItem="WxW-xI-8Is" secondAttribute="trailing" constant="16" id="jHI-z5-LsC"/>
                                     <constraint firstItem="hmF-wi-YBp" firstAttribute="leading" secondItem="jji-tS-AXr" secondAttribute="leading" constant="16" id="kER-Y9-pl5"/>
                                     <constraint firstItem="WxW-xI-8Is" firstAttribute="centerY" secondItem="hmF-wi-YBp" secondAttribute="centerY" id="o8E-pm-R4r"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-jK-6nD" userLabel="overlay view">
-                                <rect key="frame" x="0.0" y="59" width="414" height="552"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="552" id="LN5-8m-bA7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -681,13 +678,11 @@
                             <constraint firstItem="DZt-jK-6nD" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="5oy-55-ERj"/>
                             <constraint firstItem="DZt-jK-6nD" firstAttribute="top" secondItem="1tU-4x-bwo" secondAttribute="top" constant="59" id="84W-ya-gaD"/>
                             <constraint firstItem="jji-tS-AXr" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="F5V-Hc-CWW"/>
-                            <constraint firstItem="DZt-jK-6nD" firstAttribute="top" secondItem="jji-tS-AXr" secondAttribute="bottom" id="MMF-PX-GHn"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="bottom" secondItem="K4D-mL-5nI" secondAttribute="bottom" id="PB1-07-mhC"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="K4D-mL-5nI" secondAttribute="trailing" id="Sz9-P4-Onu"/>
                             <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="DZt-jK-6nD" secondAttribute="trailing" id="TWZ-Dt-J6h"/>
                             <constraint firstItem="jji-tS-AXr" firstAttribute="top" secondItem="1tU-4x-bwo" secondAttribute="top" id="ilQ-16-A64"/>
                             <constraint firstItem="K4D-mL-5nI" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="m9L-4Z-Shx"/>
-                            <constraint firstItem="K4D-mL-5nI" firstAttribute="top" secondItem="DZt-jK-6nD" secondAttribute="bottom" id="wpz-MV-IYU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mw5-As-5Fv"/>
                     </view>
@@ -695,14 +690,15 @@
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
                         <outlet property="captureButton" destination="6pD-mV-9T9" id="aPD-GE-8Wm"/>
+                        <outlet property="captureButtonsViewHeightConstraint" destination="kiJ-dw-RHA" id="LpB-i3-sGE"/>
                         <outlet property="captureView" destination="K4D-mL-5nI" id="abw-pZ-fn6"/>
                         <outlet property="flashButton" destination="hmF-wi-YBp" id="ZBr-rK-cJq"/>
                         <outlet property="galleryButton" destination="B00-KL-29z" id="mIu-2c-36d"/>
                         <outlet property="galleryImage" destination="NrQ-LV-9Yi" id="1Ie-cT-qDs"/>
                         <outlet property="headerView" destination="jji-tS-AXr" id="ti9-mu-6xL"/>
+                        <outlet property="headerViewHeightConstraint" destination="SNC-Hn-inm" id="3e6-WA-Orx"/>
                         <outlet property="overlayViewBottomConstraint" destination="1MB-zN-nHO" id="oPU-dw-0Yd"/>
                         <outlet property="overlayViewContainer" destination="DZt-jK-6nD" id="LVT-Ad-GqW"/>
-                        <outlet property="overlayViewHeightConstraint" destination="LN5-8m-bA7" id="8Jb-Cr-9DC"/>
                         <outlet property="overlayViewTopConstraint" destination="84W-ya-gaD" id="tGO-fj-hFX"/>
                         <outlet property="photoVideoView" destination="zsK-lH-C3z" id="mrE-Wy-HXb"/>
                         <outlet property="photoVideoViewCenterConstraint" destination="EuA-LK-FgT" id="Z6r-sJ-idE"/>

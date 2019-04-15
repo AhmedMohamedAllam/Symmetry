@@ -120,10 +120,7 @@ extension UIImage{
         let croppedImage = image.processPortraitImage(imageType: type)
         
         //rotate photo again to its landscape mode
-        //will be .right only if landscapeRight
-        let deviceOrientation = UIDevice.current.orientation
-        let originalImageOrientation: Orientation  = deviceOrientation == .landscapeRight ? .leftMirrored : .left
-        let photo = UIImage(cgImage: croppedImage.cgImage!, scale: 1.0, orientation: originalImageOrientation)
+        let photo = UIImage(cgImage: croppedImage.cgImage!, scale: 1.0, orientation: .left)
         return photo
     }
 }

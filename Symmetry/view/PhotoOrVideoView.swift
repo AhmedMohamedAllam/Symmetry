@@ -14,6 +14,8 @@ protocol PhotoVideoViewDelegate {
 }
 
 class PhotoOrVideoView: UIView {
+    
+    
     @IBOutlet weak var photo: UILabel!
     @IBOutlet weak var video: UILabel!
     
