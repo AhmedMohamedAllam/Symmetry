@@ -97,21 +97,14 @@ extension UIImage{
     }
     
     private func processPortraitImage(imageType type: ImageType) -> UIImage{
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
-        let width = self.size.width
-        let height = self.size.height
-        let ratio = screenWidth/width
         
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: screenWidth, height: screenWidth), false, 0.0)
-        let ctx = UIGraphicsGetCurrentContext()!
-        let y = ((screenWidth - screenHeight) * 0.5)
-        ctx.translateBy(x: 0,y: y)
-        self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: screenWidth, height: height * ratio)))
-        
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
+        if type == .square{
+            return squareImage()
+        }else if type == .photo{
+            return overlaySizeImage()
+        }else{
+            return UIImage()
+        }
     }
     
     private func processLandscapeImage(forCamera camera: SwiftyCamViewController.CameraSelection, imageType type: ImageType) -> UIImage{

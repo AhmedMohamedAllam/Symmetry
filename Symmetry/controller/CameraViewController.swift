@@ -45,12 +45,11 @@ class CameraViewController: SwiftyCamViewController {
     var leftSwipe: UISwipeGestureRecognizer!
     var rightSwipe: UISwipeGestureRecognizer!
     var delegate: CameraViewControllerDelegate?
+    var currentImageType: ImageType = .photo
     
     private var isVideo: Bool = false {
         didSet{
-            UIView.animate(withDuration: 1) { [unowned self] in
-                self.updateCameraViews(self.isVideo)
-            }
+            self.updateCameraViews(self.isVideo)
         }
     }
     private var isRecording: Bool = false{
@@ -72,10 +71,10 @@ class CameraViewController: SwiftyCamViewController {
         captureButton.delegate = self
         setupCamera()
         addSwipeGestureRecognizers()
-        updatePhotoVideoViewCenter(isVideo)
+//        updatePhotoVideoViewCenter(isVideo)
         photoVideoView.delegate = self
         updateOverlayView()
-        UpdateCameraType(with: .photo)
+        updateCameraType(with: .photo)
     }
     
     
@@ -133,7 +132,8 @@ class CameraViewController: SwiftyCamViewController {
     
     //MARK:- Helper Methods
     
-    private func UpdateCameraType(with type: ImageType){
+    private func updateCameraType(with type: ImageType){
+        currentImageType = type
         let screenHeight = UIScreen.main.bounds.size.height
         let screenWidth = UIScreen.main.bounds.size.width
         overlayViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -172,11 +172,6 @@ class CameraViewController: SwiftyCamViewController {
         headerView.backgroundColor = color
     }
     
-    private func updatePhotoVideoViewCenter(_ isVideo: Bool){
-        let centerConstant = photoVideoView.calculateCenter(isVideo: isVideo)
-        photoVideoViewCenterConstraint.constant = centerConstant
-    }
-    
     private func startRecording(){
         startVideoRecording()
         recordCounterView.startCounter()
@@ -199,9 +194,6 @@ class CameraViewController: SwiftyCamViewController {
         captureButton.isHidden = isVideo
         recordButton.isHidden = !isVideo
         recordCounterView.isHidden = !isVideo
-        updatePhotoVideoViewCenter(isVideo)
-        let type: ImageType = isVideo ? .square : .photo
-        UpdateCameraType(with: type)
     }
     
     private func updateUIWhileRecording(_ isRecording: Bool){
@@ -227,7 +219,7 @@ class CameraViewController: SwiftyCamViewController {
     }
     
     private func didCapture(photo: UIImage){
-        let photo = photo.processImage(forCamera: currentCamera, imageType: .square)
+        let photo = photo.processImage(forCamera: currentCamera, imageType: currentImageType)
         mediaStore.savePhoto(photo)
         galleryImage.image = photo
     }
@@ -257,13 +249,12 @@ class CameraViewController: SwiftyCamViewController {
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.right {
-            isVideo = true
+            photoVideoView.scrollRight()
         }
         else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
-            isVideo = false
+            photoVideoView.scrollLeft()
         }
     }
-    
 }
 
 
@@ -325,11 +316,20 @@ extension CameraViewController:  SwiftyCamViewControllerDelegate{
 }
 
 extension CameraViewController: PhotoVideoViewDelegate{
+    
+    
     func didTapVideo() {
+        updateCameraType(with: .video)
         isVideo = true
     }
     
     func didTapPhoto() {
+        updateCameraType(with: .photo)
+        isVideo = false
+    }
+    
+    func didTapSquare() {
+        updateCameraType(with: .square)
         isVideo = false
     }
 }

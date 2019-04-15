@@ -11,54 +11,112 @@ import UIKit
 protocol PhotoVideoViewDelegate {
     func didTapPhoto()
     func didTapVideo()
+    func didTapSquare()
+}
+
+class ImageTypeCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var label: UILabel!
+    let selectedColor = UIColor(red: 254/255, green: 228/255, blue: 38/255, alpha: 1)
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
+    override var isSelected: Bool{
+        didSet{
+            let color = isSelected ? selectedColor : .white
+            label.textColor = color
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        label.textColor = .white
+    }
+    
+    
 }
 
 class PhotoOrVideoView: UIView {
     
     
-    @IBOutlet weak var photo: UILabel!
-    @IBOutlet weak var video: UILabel!
+
+    @IBOutlet weak var collectionView: UICollectionView!
+
+    let types = ["VIDEO", "PHOTO", "SQUARE"]
     
     var delegate: PhotoVideoViewDelegate?
+    var currentIndex: Int = 1
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let photoTapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
-        let videoTapGesture = UITapGestureRecognizer(target: self, action: #selector(videoTapped))
-        
-        photo.addGestureRecognizer(photoTapGesture)
-        video.addGestureRecognizer(videoTapGesture)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        selectItem(at: currentIndex)
     }
     
-    func calculateCenter(isVideo: Bool) -> CGFloat{
-        updateUI(isVideo)
-        if isVideo{
-            let centerVideo = (video.frame.width / 2) + 14
-            return centerVideo
-        }else{
-            let centerPhoto = (photo.frame.width / 2) + 10
-            return centerPhoto * -1
+    func scrollRight() {
+        guard currentIndex > 0 else {
+            return
         }
+        deselectItem(at: currentIndex)
+        selectItem(at: currentIndex - 1)
+        currentIndex -= 1
+    }
+    
+    func scrollLeft(){
+        guard currentIndex < types.count - 1 else {
+            return
+        }
+        deselectItem(at: currentIndex)
+        selectItem(at: currentIndex + 1)
+        currentIndex += 1
+    }
+    
+    private func selectItem(at index: Int){
+        let indexPath = IndexPath(row: index, section: 0)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        collectionView(collectionView, didSelectItemAt: indexPath)
+    }
+    
+    private func deselectItem(at index: Int){
+        let indexPath = IndexPath(row: index, section: 0)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     
-    private func updateUI(_ isVideo: Bool){
-        update(label: photo, isSelected: !isVideo)
-        update(label: video, isSelected: isVideo)
+}
+
+
+extension PhotoOrVideoView: UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return types.count
     }
     
-    private func update(label: UILabel, isSelected: Bool){
-        let choosenColor = UIColor(displayP3Red: 255.0, green: 200.0, blue: 0, alpha: 1.0)
-        label.textColor = isSelected ? choosenColor : UIColor.white
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageTypeCollectionViewCell", for: indexPath) as! ImageTypeCollectionViewCell
+        cell.label.text = types[indexPath.row]
+        return cell
     }
     
-    //    MARK:- Gesture Recognizer
-    @objc private func photoTapped(){
-        delegate?.didTapPhoto()
-    }
     
-    @objc private func videoTapped(){
-        delegate?.didTapVideo()
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageTypeCollectionViewCell", for: indexPath) as! ImageTypeCollectionViewCell
+        cell.label.textColor = UIColor(red: 254/255, green: 228/255, blue: 38/255, alpha: 1)
+        
+        switch indexPath.row {
+        case 0:
+            delegate?.didTapVideo()
+        case 1:
+            delegate?.didTapPhoto()
+        case 2:
+            delegate?.didTapSquare()
+        default:
+            print("Check your array")
+        }
     }
     
     
