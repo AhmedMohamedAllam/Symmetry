@@ -55,6 +55,10 @@ class SettingsTableViewController: UITableViewController{
     var isGridSelected: Bool = false
     var delegate: SettingsTableViewControllerDelegate?
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +73,7 @@ class SettingsTableViewController: UITableViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "colorPopUpSegue", let colorVC = segue.destination as? ColorsViewController{
             colorVC.delegate = self
-            colorVC.previousColor = lineColorView.backgroundColor!
+            colorVC.previousColor = lineColorView.backgroundColor ?? .white
         }
     }
 

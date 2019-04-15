@@ -27,10 +27,14 @@ class CameraViewController: SwiftyCamViewController {
     @IBOutlet weak var switchCameraButton: UIButton!
     @IBOutlet weak var galleryImage: UIImageView!
     @IBOutlet weak var recordCounterView: RecordCounterView!
-    @IBOutlet var captureView: UIView!
-    @IBOutlet var photoVideoView: PhotoOrVideoView!
+    @IBOutlet weak var captureView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var photoVideoView: PhotoOrVideoView!
     @IBOutlet weak var photoVideoViewCenterConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var overlayViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var overlayViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var overlayViewBottomConstraint: NSLayoutConstraint!
+
     override var prefersStatusBarHidden: Bool{
         return true
     }
@@ -54,6 +58,10 @@ class CameraViewController: SwiftyCamViewController {
         }
     }
     
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         photoLibraryPicker = PhotoLibraryPicker(viewController: self)
@@ -66,6 +74,7 @@ class CameraViewController: SwiftyCamViewController {
         updatePhotoVideoViewCenter(isVideo)
         photoVideoView.delegate = self
         updateOverlayView()
+        UpdateCameraType(with: .photo)
     }
     
     
@@ -123,6 +132,44 @@ class CameraViewController: SwiftyCamViewController {
     
     //MARK:- Helper Methods
     
+    private func UpdateCameraType(with type: ImageType){
+        let screenHeight = UIScreen.main.bounds.size.height
+        let screenWidth = UIScreen.main.bounds.size.width
+        overlayViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        switch type {
+        case .square:
+            updateCptureAndHeaderViewColor(with: .black)
+            let topConstant = ((screenWidth - screenHeight) * 0.5)
+            let bottomConstant = topConstant
+            overlayViewBottomConstraint.isActive = false
+            overlayViewTopConstraint.constant = -topConstant
+            overlayViewBottomConstraint.constant = bottomConstant
+            overlayViewHeightConstraint.constant = screenWidth
+        case .photo:
+            // header view ratio is 0.08 from the height of the screen
+            updateCptureAndHeaderViewColor(with: UIColor.black.withAlphaComponent(0.5))
+            let topConstant = screenHeight * 0.08
+            let heightConstant = screenHeight * 0.75
+            let bottomConstant = screenHeight * 0.17
+            overlayViewTopConstraint.constant = topConstant
+            overlayViewBottomConstraint.constant = bottomConstant
+            overlayViewHeightConstraint.constant = heightConstant
+        case .video:
+            updateCptureAndHeaderViewColor(with: .clear)
+//            overlayViewBottomConstraint.isActive = true
+            overlayViewTopConstraint.constant = 0
+            overlayViewBottomConstraint.constant = 0
+            overlayViewHeightConstraint.constant = screenHeight
+            print("video choosed")
+        }
+        
+    }
+    
+    private func updateCptureAndHeaderViewColor(with color: UIColor){
+        captureView.backgroundColor = color
+        headerView.backgroundColor = color
+    }
+    
     private func updatePhotoVideoViewCenter(_ isVideo: Bool){
         let centerConstant = photoVideoView.calculateCenter(isVideo: isVideo)
         photoVideoViewCenterConstraint.constant = centerConstant
@@ -151,6 +198,8 @@ class CameraViewController: SwiftyCamViewController {
         recordButton.isHidden = !isVideo
         recordCounterView.isHidden = !isVideo
         updatePhotoVideoViewCenter(isVideo)
+        let type: ImageType = isVideo ? .video : .photo
+        UpdateCameraType(with: type)
     }
     
     private func updateUIWhileRecording(_ isRecording: Bool){
@@ -176,6 +225,7 @@ class CameraViewController: SwiftyCamViewController {
     }
     
     private func didCapture(photo: UIImage){
+        let photo = photo.processImage(forCamera: currentCamera, imageType: .square)
         mediaStore.savePhoto(photo)
         galleryImage.image = photo
     }
