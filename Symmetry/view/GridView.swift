@@ -11,7 +11,7 @@ import UIKit
 
 @IBDesignable class GridView: UIView {
     let defaults = UserDefaults.standard
-    var gridCellNumber: GridCellNumber!
+    var gridCellNumber: CellCoordinate!
     
     @IBInspectable var numberOfColumns: Int = 2
     @IBInspectable var numberOfRows: Int = 2
@@ -36,7 +36,7 @@ import UIKit
     
     override func draw(_ rect: CGRect) {
         configureViewFromUserDefaults()
-        gridCellNumber = GridCellNumber(columns: numberOfColumns, rows: numberOfRows)
+        gridCellNumber = CellCoordinate(columns: numberOfColumns, rows: numberOfRows)
         
         if let context = UIGraphicsGetCurrentContext() {
             

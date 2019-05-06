@@ -11,6 +11,8 @@ import UIKit
 
 class CircleView: UIView{
     let defaults = UserDefaults.standard
+    var gridCellNumber: CellCoordinate!
+
     
     @IBInspectable var numberOfCircles: Int = 5
     @IBInspectable var lineWidth: CGFloat = 1.0
@@ -39,7 +41,8 @@ class CircleView: UIView{
     
     override func draw(_ rect: CGRect) {
         configureViewFromUserDefaults()
-        
+        gridCellNumber = CellCoordinate(circles: numberOfCircles)
+
         let width = rect.width
         let hieght = rect.height
         
@@ -61,8 +64,18 @@ class CircleView: UIView{
                 context.addArc(center: center, radius: radius, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true)
                 context.strokePath()
             }
-            drawCenterLines(with: context, to: rect, isDashed: centeredDashedLines)
+            
+            let circleLinesCount = numberOfCircles * 2
+            for i in 0..<circleLinesCount{
+                addHorizontalCellNumbers(index: i, radius: radiusFactor)
+            }
 
+            for i in 0..<circleLinesCount{
+                addVetictalCellNumbers(index: i, radius: radiusFactor)
+            }
+            
+            drawCenterLines(with: context, to: rect, isDashed: centeredDashedLines)
+            
             if crossedLines{
                 drawCrossLines(with: context, to: rect)
             }
@@ -133,4 +146,45 @@ class CircleView: UIView{
         rightEndPoint.y = hieght
         drawLine(with: context, startPoint: rightStartPoint, endPoint: rightEndPoint, isDashed: false)
     }
+    
+    private func cellLabel(with number: Int) -> UILabel{
+        let label = UILabel(frame: CGRect(x: 100, y: 0, width: 20, height: 20))
+        label.text = "\(number)"
+        label.textColor = lineColor
+        label.textAlignment = .center
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
+    private func addHorizontalCellNumbers(index: Int, radius: CGFloat){
+        let isCircleNumbersShown = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
+        guard isCircleNumbersShown else {
+            return
+        }
+        let number = gridCellNumber.horizontalNumbers [index]
+        if number == 0 {return}
+        let label = cellLabel(with: number)
+        let xConstant = radius * CGFloat(index) - radius / 2 - ((CGFloat(numberOfCircles) - 1) * radius)
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: xConstant ),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -8)
+            ])
+    }
+    
+    private func addVetictalCellNumbers(index: Int, radius: CGFloat){
+        let isCircleNumbersShown = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
+        guard isCircleNumbersShown else {
+            return
+        }
+        let number = gridCellNumber.verticalNumbers[index]
+        if number == 0 {return}
+        let label = cellLabel(with: number)
+        let yConstant = radius * CGFloat(index) - radius / 2 - ((CGFloat(numberOfCircles) - 1) * radius)
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -8),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: yConstant)
+            ])
+    }
+    
 }

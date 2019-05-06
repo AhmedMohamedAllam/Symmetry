@@ -20,7 +20,7 @@
 		F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C2224FB2C500C6BDEF /* Preferences.swift */; };
 		F93B21C52250028000C6BDEF /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C42250028000C6BDEF /* ColorsViewController.swift */; };
 		F93B21CB2250E02800C6BDEF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21CA2250E02800C6BDEF /* Extensions.swift */; };
-		F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */; };
+		F9901FF022202FBF009B57F3 /* CellCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */; };
 		F990C0902252B5950062A17A /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C0862252B5930062A17A /* MediaStore.swift */; };
 		F990C0912252B5950062A17A /* PhotoOrVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C0872252B5930062A17A /* PhotoOrVideoView.swift */; };
 		F990C0922252B5950062A17A /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C0882252B5930062A17A /* Utiles.swift */; };
@@ -52,7 +52,7 @@
 		F93B21C2224FB2C500C6BDEF /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		F93B21C42250028000C6BDEF /* ColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		F93B21CA2250E02800C6BDEF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellNumber.swift; sourceTree = "<group>"; };
+		F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCoordinate.swift; sourceTree = "<group>"; };
 		F990C0862252B5930062A17A /* MediaStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStore.swift; sourceTree = "<group>"; };
 		F990C0872252B5930062A17A /* PhotoOrVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoOrVideoView.swift; sourceTree = "<group>"; };
 		F990C0882252B5930062A17A /* Utiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utiles.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 			children = (
 				F90B464E22134BF000AE4515 /* CircleView.swift */,
 				F90B464F22134BF000AE4515 /* GridView.swift */,
-				F9901FEF22202FBF009B57F3 /* GridCellNumber.swift */,
+				F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */,
 				F90B465022134BF000AE4515 /* OverlayView.swift */,
 				F990C0872252B5930062A17A /* PhotoOrVideoView.swift */,
 				F990C08F2252B5950062A17A /* RecordCounterView.swift */,
@@ -310,7 +310,7 @@
 			files = (
 				F990C0982252B5950062A17A /* PhotoLibraryPicker.swift in Sources */,
 				F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */,
-				F9901FF022202FBF009B57F3 /* GridCellNumber.swift in Sources */,
+				F9901FF022202FBF009B57F3 /* CellCoordinate.swift in Sources */,
 				F90B465222134BF000AE4515 /* CircleView.swift in Sources */,
 				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
 				F990C09B2252BB200062A17A /* NotificationName+Extension.swift in Sources */,
