@@ -100,8 +100,8 @@ extension UIImage{
         
         if type == .square{
             return squareImage()
-        }else if type == .photo{
-            return overlaySizeImage()
+//        }else if type == .photo{
+//            return overlaySizeImage()
         }else{
             return UIImage()
         }

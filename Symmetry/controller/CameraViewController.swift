@@ -150,11 +150,11 @@ class CameraViewController: SwiftyCamViewController {
             captureButtonsViewHeightConstraint.constant = bottomConstant
         case .photo:
             // header view ratio is 0.08 from the height of the screen
-            updateCptureAndHeaderViewColor(with: .black)
+            updateCptureAndHeaderViewColor(with: .clear)
             let topConstant = screenHeight * 0.08
             let bottomConstant = screenHeight * 0.17
-            overlayViewTopConstraint.constant = topConstant
-            overlayViewBottomConstraint.constant = bottomConstant
+            overlayViewTopConstraint.constant = 0
+            overlayViewBottomConstraint.constant = 0
             headerViewHeightConstraint.constant = topConstant
             captureButtonsViewHeightConstraint.constant = bottomConstant
         case .video:
