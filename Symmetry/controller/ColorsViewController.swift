@@ -16,6 +16,7 @@ protocol ColorsViewControllerDelegate {
 class ColorsViewController: UIViewController{
     
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var colorPickerView: UIView!
     private var colorPicker: ChromaColorPicker!
     var previousColor: UIColor!
@@ -25,6 +26,7 @@ class ColorsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         closeButton.layer.cornerRadius = 25
+        doneButton.layer.cornerRadius = 25
         createColorPicker()
     }
 
@@ -46,6 +48,12 @@ class ColorsViewController: UIViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func donePressed(_ sender: Any) {
+        let color = colorPicker.currentColor
+        delegate?.didPickColor(color)
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func addColorPickerConstraints(){
         NSLayoutConstraint.activate([
             colorPicker.centerXAnchor.constraint(equalTo: colorPickerView.centerXAnchor),
@@ -56,8 +64,7 @@ class ColorsViewController: UIViewController{
 
 extension ColorsViewController: ChromaColorPickerDelegate{
     func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
-        delegate?.didPickColor(color)
-        dismiss(animated: true, completion: nil)
+        //let it empthy to disable add  button press
     }
 }
 

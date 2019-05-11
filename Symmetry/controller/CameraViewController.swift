@@ -46,6 +46,7 @@ class CameraViewController: SwiftyCamViewController {
     var rightSwipe: UISwipeGestureRecognizer!
     var delegate: CameraViewControllerDelegate?
     var currentImageType: ImageType = .photo
+    var currentOverlayView: UIView!
     
     private var isVideo: Bool = false {
         didSet{
@@ -92,15 +93,16 @@ class CameraViewController: SwiftyCamViewController {
     }
     
     @objc func updateOverlayView(){
-        let overlayView =  OverlayView.getOverlayView(frame: overlayViewContainer.bounds)
-        overlayView.removeFromSuperview()
-        overlayViewContainer.addSubview(overlayView)
-        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        overlayViewContainer.subviews.first?.removeFromSuperview()
+        currentOverlayView =  OverlayView.getOverlayView(frame: overlayViewContainer.bounds)
+        currentOverlayView.removeFromSuperview()
+        overlayViewContainer.addSubview(currentOverlayView)
+        currentOverlayView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            overlayView.topAnchor.constraint(equalTo: overlayViewContainer.topAnchor),
-            overlayView.trailingAnchor.constraint(equalTo: overlayViewContainer.trailingAnchor),
-            overlayView.bottomAnchor.constraint(equalTo: overlayViewContainer.bottomAnchor),
-            overlayView.leadingAnchor.constraint(equalTo: overlayViewContainer.leadingAnchor)
+            currentOverlayView.topAnchor.constraint(equalTo: overlayViewContainer.topAnchor),
+            currentOverlayView.trailingAnchor.constraint(equalTo: overlayViewContainer.trailingAnchor),
+            currentOverlayView.bottomAnchor.constraint(equalTo: overlayViewContainer.bottomAnchor),
+            currentOverlayView.leadingAnchor.constraint(equalTo: overlayViewContainer.leadingAnchor)
             ])
         overlayViewContainer.layoutSubviews()
     }
@@ -164,6 +166,7 @@ class CameraViewController: SwiftyCamViewController {
             headerViewHeightConstraint.constant = topConstant
             captureButtonsViewHeightConstraint.constant = bottomConstant
         }
+        updateOverlayView()
         
     }
     
@@ -347,7 +350,6 @@ extension CameraViewController{
 //will be called after user update settings
 extension CameraViewController: SettingsTableViewControllerDelegate{
     func didChangeSettings(){
-        overlayViewContainer.subviews.first?.removeFromSuperview()
         updateOverlayView()
     }
 }
