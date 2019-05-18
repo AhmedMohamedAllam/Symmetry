@@ -269,6 +269,7 @@ extension CameraViewController: OverLayViewDelegate{
     func didPressSettingsButton() {
         let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
         let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController
+        settingsViewController?.delegate = self
         imagePicker.pushViewController(settingsViewController!, animated: true)
     }
 }
@@ -286,6 +287,6 @@ fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePicke
 
 extension CameraViewController: SettingsTableViewControllerDelegate {
     func didChangeSettings(){
-        
+        updateOverlayView()
     }
 }

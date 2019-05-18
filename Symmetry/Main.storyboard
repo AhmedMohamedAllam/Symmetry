@@ -518,24 +518,6 @@
             </objects>
             <point key="canvasLocation" x="1076.8115942028987" y="-73.369565217391312"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Bjf-0w-Zla">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EEI-tU-gEt" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UDu-c2-YlD">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="kiO-ah-GXA" kind="relationship" relationship="rootViewController" id="VQC-iY-9q7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AJm-6h-0CF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1966.6666666666667" y="-73.369565217391312"/>
-        </scene>
     </scenes>
     <resources>
         <image name="checkmark" width="36" height="36"/>
