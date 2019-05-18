@@ -54,7 +54,7 @@ struct CellCoordinate {
     }
     
     func divideNumbersForCircles(numberOfCircles: Int) -> [Int] {
-        var mid = (numberOfCircles / 2) - 1
+        let mid = (numberOfCircles / 2) - 1
         
         
         var devidedNumbers = [Int]()

@@ -22,7 +22,6 @@
 		F93B21CB2250E02800C6BDEF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21CA2250E02800C6BDEF /* Extensions.swift */; };
 		F9901FF022202FBF009B57F3 /* CellCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */; };
 		F990C0902252B5950062A17A /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C0862252B5930062A17A /* MediaStore.swift */; };
-		F990C0912252B5950062A17A /* PhotoOrVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C0872252B5930062A17A /* PhotoOrVideoView.swift */; };
 		F990C0922252B5950062A17A /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C0882252B5930062A17A /* Utiles.swift */; };
 		F990C0942252B5950062A17A /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C08A2252B5940062A17A /* PhotoLibraryManager.swift */; };
 		F990C0952252B5950062A17A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C08B2252B5940062A17A /* CameraViewController.swift */; };
@@ -31,6 +30,7 @@
 		F990C0992252B5950062A17A /* RecordCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C08F2252B5950062A17A /* RecordCounterView.swift */; };
 		F990C09B2252BB200062A17A /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C09A2252BB200062A17A /* NotificationName+Extension.swift */; };
 		F990C09D2252C4AC0062A17A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F990C09C2252C4AC0062A17A /* Assets.xcassets */; };
+		F9E798C222902D2700AB0E65 /* OverlayViewContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E798C122902D2700AB0E65 /* OverlayViewContainer.xib */; };
 		F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD9FA0221812BE00A64C49 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,6 @@
 		F93B21CA2250E02800C6BDEF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCoordinate.swift; sourceTree = "<group>"; };
 		F990C0862252B5930062A17A /* MediaStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStore.swift; sourceTree = "<group>"; };
-		F990C0872252B5930062A17A /* PhotoOrVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoOrVideoView.swift; sourceTree = "<group>"; };
 		F990C0882252B5930062A17A /* Utiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utiles.swift; sourceTree = "<group>"; };
 		F990C08A2252B5940062A17A /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		F990C08B2252B5940062A17A /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		F990C08F2252B5950062A17A /* RecordCounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCounterView.swift; sourceTree = "<group>"; };
 		F990C09A2252BB200062A17A /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NotificationName+Extension.swift"; path = "Symmetry/app/NotificationName+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		F990C09C2252C4AC0062A17A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9E798C122902D2700AB0E65 /* OverlayViewContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverlayViewContainer.xib; sourceTree = "<group>"; };
 		F9FD9FA0221812BE00A64C49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,9 +136,9 @@
 				F90B464F22134BF000AE4515 /* GridView.swift */,
 				F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */,
 				F90B465022134BF000AE4515 /* OverlayView.swift */,
-				F990C0872252B5930062A17A /* PhotoOrVideoView.swift */,
 				F990C08F2252B5950062A17A /* RecordCounterView.swift */,
 				F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */,
+				F9E798C122902D2700AB0E65 /* OverlayViewContainer.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -247,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F90B462F221345FC00AE4515 /* LaunchScreen.storyboard in Resources */,
+				F9E798C222902D2700AB0E65 /* OverlayViewContainer.xib in Resources */,
 				F990C09D2252C4AC0062A17A /* Assets.xcassets in Resources */,
 				F90B46372213470000AE4515 /* Main.storyboard in Resources */,
 			);
@@ -287,14 +288,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyCam/SwiftyCam.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyCam.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -319,7 +318,6 @@
 				F990C0902252B5950062A17A /* MediaStore.swift in Sources */,
 				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
 				F990C0952252B5950062A17A /* CameraViewController.swift in Sources */,
-				F990C0912252B5950062A17A /* PhotoOrVideoView.swift in Sources */,
 				F93B21C52250028000C6BDEF /* ColorsViewController.swift in Sources */,
 				F93B21CB2250E02800C6BDEF /* Extensions.swift in Sources */,
 				F90B465322134BF000AE4515 /* GridView.swift in Sources */,

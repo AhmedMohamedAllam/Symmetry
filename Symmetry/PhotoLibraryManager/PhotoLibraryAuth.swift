@@ -32,6 +32,8 @@ struct PhotoLibraryAuth {
         case .restricted:
             completion(false)
             self.settingsAlert(vc: vc, title: Constants.caution, message: Constants.photoLibraryMessage)
+        @unknown default:
+            self.settingsAlert(vc: vc, title: Constants.caution, message: Constants.photoLibraryMessage)
         }
     }
     

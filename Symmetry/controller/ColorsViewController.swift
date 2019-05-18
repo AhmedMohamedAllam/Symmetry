@@ -28,6 +28,7 @@ class ColorsViewController: UIViewController{
         closeButton.layer.cornerRadius = 25
         doneButton.layer.cornerRadius = 25
         createColorPicker()
+        
     }
 
     
