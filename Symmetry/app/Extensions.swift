@@ -47,3 +47,23 @@ extension UIImage{
         return img!
     }
 }
+
+extension UIViewController{
+     func presentAlertController(title: String, message: String) {
+        let alertController = getAlertWith(title: title, message: message)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func getAlertWith(title: String, message: String) -> UIAlertController{
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        return alertController
+    }
+}
+
+
+extension Notification.Name{
+    static let didChangeOverlaySettings = NSNotification.Name(rawValue: "settingsDidChange")
+    static let didCaptureItem =  NSNotification.Name(rawValue: "_UIImagePickerControllerUserDidCaptureItem")
+    static let didRejectItem =  NSNotification.Name(rawValue: "_UIImagePickerControllerUserDidRejectItem")
+}

@@ -507,29 +507,12 @@
                     <view key="view" contentMode="scaleToFill" id="1tU-4x-bwo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-jK-6nD" userLabel="overlay view">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="DZt-jK-6nD" secondAttribute="bottom" id="1MB-zN-nHO"/>
-                            <constraint firstItem="DZt-jK-6nD" firstAttribute="leading" secondItem="mw5-As-5Fv" secondAttribute="leading" id="5oy-55-ERj"/>
-                            <constraint firstItem="DZt-jK-6nD" firstAttribute="top" secondItem="1tU-4x-bwo" secondAttribute="top" id="84W-ya-gaD"/>
-                            <constraint firstItem="mw5-As-5Fv" firstAttribute="trailing" secondItem="DZt-jK-6nD" secondAttribute="trailing" id="TWZ-Dt-J6h"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mw5-As-5Fv"/>
                     </view>
                     <navigationItem key="navigationItem" id="W7t-zM-rev"/>
                     <size key="freeformSize" width="414" height="736"/>
-                    <connections>
-                        <outlet property="overlayViewBottomConstraint" destination="1MB-zN-nHO" id="oPU-dw-0Yd"/>
-                        <outlet property="overlayViewContainer" destination="DZt-jK-6nD" id="LVT-Ad-GqW"/>
-                        <outlet property="overlayViewTopConstraint" destination="84W-ya-gaD" id="tGO-fj-hFX"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gG-Ja-wGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
