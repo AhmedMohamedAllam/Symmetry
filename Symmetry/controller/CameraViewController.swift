@@ -14,6 +14,7 @@ class CameraViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     var imagePicker: UIImagePickerController = UIImagePickerController()
+    var overlay: OverlayView!
     var appName: String = Constants.appName
     lazy var cameraRect: CGRect = {
         return getRectAfterOrientation(rect: self.imagePicker.view.frame)
@@ -27,6 +28,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mediaStore = MediaStore(viewController: self)
+        overlay = OverlayView(delegate: self)
         addDidChangeOverlaySettingsObserver()
         addDidChangeOrientationObserver()
         openCamera()
@@ -49,9 +51,15 @@ class CameraViewController: UIViewController {
     //    MARK- Camera Configuration
     func openCamera() {
         setupCamera()
-        PhotoLibraryAuth.checkAuthorisationStatus(vc: self) { (isAutorized) in
-            if isAutorized {
-                self.present(self.imagePicker, animated: false, completion: nil)
+        requestCameraAuthorization {[unowned self] granted in
+            DispatchQueue.main.async {
+                if granted {
+                    self.present(self.imagePicker, animated: false, completion: nil)
+                }
+                else{
+                    self.presentAlertController(with: self, title: "Camera access permission is denied!" ,
+                                                message: "Change (\(self.appName)) all access permessions from settings first!")
+                }
             }
         }
     }
@@ -69,7 +77,7 @@ class CameraViewController: UIViewController {
             imagePicker.mediaTypes = availableMediaTypes
         }
         let rect = getRectAfterOrientation(rect: cameraRect)
-        let overlayView = OverlayView.getOverlayView(frame: rect)
+        let overlayView = overlay.getOverlayView(frame: rect)
         
         imagePicker.cameraOverlayView = overlayView
         imagePicker.delegate = self
@@ -84,8 +92,6 @@ class CameraViewController: UIViewController {
     //Mark: - Camera Authorization
     private func requestCameraAuthorization(_ completion : @escaping (Bool) -> Void){
         let mediaType = AVMediaType.video
-        
-        
         
         if !isCameraAuthorized(for: mediaType){
             requestCameraAuthorization(for: mediaType, onComplete: completion)
@@ -128,7 +134,7 @@ class CameraViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.didRejectItem, object:nil, queue:nil, using: {[weak self] note in
             guard let self = self else {return}
             self.didCapture = false
-            imagePicker.cameraOverlayView = OverlayView.getOverlayView(frame: self.cameraRect)
+            imagePicker.cameraOverlayView = self.overlay.getOverlayView(frame: self.cameraRect)
         })
     }
     
@@ -206,7 +212,7 @@ class CameraViewController: UIViewController {
             return
         }
         let rect = getRectAfterOrientation(rect: cameraRect)
-        let overlayView =  OverlayView.getOverlayView(frame: rect)
+        let overlayView =  overlay.getOverlayView(frame: rect)
         imagePicker.cameraOverlayView = overlayView
     }
     
@@ -259,13 +265,13 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
     }
 }
 
-//extension CameraViewController: OverLayViewDelegate{
-//    func didPressSettingsButton() {
-//        let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController
-//        imagePicker.pushViewController(settingsViewController!, animated: true)
-//    }
-//}
+extension CameraViewController: OverLayViewDelegate{
+    func didPressSettingsButton() {
+        let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController
+        imagePicker.pushViewController(settingsViewController!, animated: true)
+    }
+}
 
 
 // Helper function inserted by Swift 4.2 migrator.
@@ -278,3 +284,8 @@ fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePicke
     return input.rawValue
 }
 
+extension CameraViewController: SettingsTableViewControllerDelegate {
+    func didChangeSettings(){
+        
+    }
+}
