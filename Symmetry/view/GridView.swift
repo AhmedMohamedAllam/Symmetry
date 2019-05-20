@@ -96,16 +96,30 @@ import UIKit
         guard defaults.bool(forKey: SettingsKeys.showDashedLines.rawValue) else {
             return false
         }
-        return isOdd(lines) && isCenterLine(lines: lines, currentLine: currentLine)
+        return isCenterLine(lines: lines, currentLine: currentLine)
     }
     
     private func isOdd(_ lines: Int) -> Bool{
         return lines > 4 && lines % 2 != 0
     }
     
+    private func isEven(_ lines: Int) -> Bool{
+        return lines > 2 && lines % 2 == 0
+    }
+    
     private func isCenterLine(lines: Int, currentLine: Int) -> Bool{
-        let center = (lines / 2) + 1
-        return center == currentLine
+        if isOdd(lines){
+            let center = (lines / 2) + 1
+            return currentLine == center
+        }
+        
+        if isEven(lines){
+            let center = (lines / 2)
+            //if even number mark two lines as center
+            return (currentLine == center) || (currentLine == center + 1)
+        }
+        
+        return false
     }
     
     private func cellLabel(with number: Int) -> UILabel{

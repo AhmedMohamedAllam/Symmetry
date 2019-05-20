@@ -29,6 +29,7 @@
 		F990C0982252B5950062A17A /* PhotoLibraryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C08E2252B5950062A17A /* PhotoLibraryPicker.swift */; };
 		F990C0992252B5950062A17A /* RecordCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F990C08F2252B5950062A17A /* RecordCounterView.swift */; };
 		F990C09D2252C4AC0062A17A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F990C09C2252C4AC0062A17A /* Assets.xcassets */; };
+		F9E798C42290594500AB0E65 /* VideoCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E798C32290594500AB0E65 /* VideoCrop.swift */; };
 		F9FD9FA1221812BE00A64C49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FD9FA0221812BE00A64C49 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		F990C08E2252B5950062A17A /* PhotoLibraryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryPicker.swift; sourceTree = "<group>"; };
 		F990C08F2252B5950062A17A /* RecordCounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCounterView.swift; sourceTree = "<group>"; };
 		F990C09C2252C4AC0062A17A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9E798C32290594500AB0E65 /* VideoCrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCrop.swift; path = Symmetry/PhotoLibraryManager/VideoCrop.swift; sourceTree = SOURCE_ROOT; };
 		F9FD9FA0221812BE00A64C49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 				F990C08D2252B5940062A17A /* PhotoLibraryAuth.swift */,
 				F990C08A2252B5940062A17A /* PhotoLibraryManager.swift */,
 				F990C08E2252B5950062A17A /* PhotoLibraryPicker.swift */,
+				F9E798C32290594500AB0E65 /* VideoCrop.swift */,
 			);
 			path = photoLibraryManager;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				F9901FF022202FBF009B57F3 /* CellCoordinate.swift in Sources */,
 				F90B465222134BF000AE4515 /* CircleView.swift in Sources */,
 				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
+				F9E798C42290594500AB0E65 /* VideoCrop.swift in Sources */,
 				F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */,
 				F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */,
 				F990C0902252B5950062A17A /* MediaStore.swift in Sources */,

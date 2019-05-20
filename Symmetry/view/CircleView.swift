@@ -61,6 +61,7 @@ class CircleView: UIView{
             //draw circles
             for i in 1...numberOfCircles{
                 let radius = (radiusFactor * CGFloat(i))
+                let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
                 context.addArc(center: center, radius: radius, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true)
                 context.strokePath()
             }

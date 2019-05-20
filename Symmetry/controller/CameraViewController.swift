@@ -78,16 +78,12 @@ class CameraViewController: UIViewController {
         }
         let rect = getRectAfterOrientation(rect: cameraRect)
         let overlayView = overlay.getOverlayView(frame: rect)
-        
         imagePicker.cameraOverlayView = overlayView
         imagePicker.delegate = self
-        
+        imagePicker.videoQuality = .typeHigh
         removeOverlayAfterTakePhoto(from: imagePicker)
         addOverlayAfterRejectPhoto(from: imagePicker)
     }
-    
-    
-    
     
     //Mark: - Camera Authorization
     private func requestCameraAuthorization(_ completion : @escaping (Bool) -> Void){
@@ -236,7 +232,11 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
         }
         // To handle video
         if let videoUrl = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? NSURL{
-            mediaStore.saveVideo(with: videoUrl as URL)
+            let asset = AVURLAsset(url: videoUrl as URL)
+            let duration = asset.duration.seconds
+            VideoCrop.suqareCropVideo(inputURL: videoUrl, seconds: duration) { croppedUrl in
+                self.mediaStore.saveVideo(with: videoUrl as URL)
+            }
             //            UISaveVideoAtPathToSavedPhotosAlbum(videoPath, self, nil, nil)
         }
         

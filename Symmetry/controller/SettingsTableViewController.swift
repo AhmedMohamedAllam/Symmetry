@@ -10,6 +10,7 @@ import UIKit
 
 enum SettingsKeys: String {
     case isGrid
+    case isSquared
     case lineWidth
     case lineColor
     case numberOfColumns
@@ -37,10 +38,11 @@ class SettingsTableViewController: UITableViewController{
     
     @IBOutlet weak var gridNumbersSwitch: UISwitch!
     @IBOutlet weak var circleNumbersSwitch: UISwitch!
+    @IBOutlet weak var squaredFrameSwitch: UISwitch!
     @IBOutlet weak var gridCenterdDashedLineSwitch: UISwitch!
     @IBOutlet weak var circleCenteredDashedLinesSwitch: UISwitch!
     @IBOutlet weak var circleCrossedLinesSwitch: UISwitch!
-    
+
     @IBOutlet weak var lineWidthTextField: UITextField!
     @IBOutlet weak var columnsTextField: UITextField!
     @IBOutlet weak var rowsTextField: UITextField!
@@ -80,6 +82,7 @@ class SettingsTableViewController: UITableViewController{
     // Configure previous settings and configure current setting views with them
     func configureSettingStartWithUserDefaults() {
         isGridSelected = defaults.bool(forKey: SettingsKeys.isGrid.rawValue)
+        
         var lineWidth = defaults.integer(forKey: SettingsKeys.lineWidth.rawValue)
         lineWidth = lineWidth > 0 ? lineWidth : 1
         let lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue)
@@ -94,6 +97,8 @@ class SettingsTableViewController: UITableViewController{
         let gridDashedLines = defaults.bool(forKey: SettingsKeys.showDashedLines.rawValue)
         let gridNumbers = defaults.bool(forKey: SettingsKeys.showGridNumbers.rawValue)
         let circleNumbers = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
+        let isSquared = defaults.bool(forKey: SettingsKeys.isSquared.rawValue)
+        
         
         lineWidthStepper.value = Double(lineWidth)
         columnsStepper.value = Double(columns)
@@ -106,13 +111,14 @@ class SettingsTableViewController: UITableViewController{
         circlesTextField.text = String(circles)
         circleCenteredDashedLinesSwitch.setOn(centeredDashedLines , animated: false)
         circleCrossedLinesSwitch.setOn(crossedLines, animated: false)
+        squaredFrameSwitch.setOn(isSquared, animated: false)
         gridCenterdDashedLineSwitch.setOn(gridDashedLines, animated: false)
         gridNumbersSwitch.setOn(gridNumbers, animated: false)
         circleNumbersSwitch.setOn(circleNumbers, animated: false)
     }
     
     @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didPressDone(_ sender: UIBarButtonItem) {
@@ -127,6 +133,8 @@ class SettingsTableViewController: UITableViewController{
         let isGridDashedLines = gridCenterdDashedLineSwitch.isOn
         let isGridNumbersShown = gridNumbersSwitch.isOn
         let isCircleNumbersShown = circleNumbersSwitch.isOn
+        let isSquared = squaredFrameSwitch.isOn
+        
         
         defaults.set(isGridSelected, forKey: SettingsKeys.isGrid.rawValue)
         defaults.set(color, forKey: SettingsKeys.lineColor.rawValue)
@@ -139,11 +147,12 @@ class SettingsTableViewController: UITableViewController{
         defaults.set(isGridDashedLines, forKey: SettingsKeys.showDashedLines.rawValue)
         defaults.set(isGridNumbersShown, forKey: SettingsKeys.showGridNumbers.rawValue)
         defaults.set(isCircleNumbersShown, forKey: SettingsKeys.showCircleNumbers.rawValue)
-        
+        defaults.set(isSquared, forKey: SettingsKeys.isSquared.rawValue)
+
         // notify CameraViewController that done button was pressed
         delegate?.didChangeSettings()
         //return to Camera
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -227,8 +236,10 @@ class SettingsTableViewController: UITableViewController{
         //if it should hide circle or grid return 0
         if  shouldHideSection(section){
             return 0
-        }else if section == 0 || section == 1{ // if first or second section return 2
+        }else if section == 0{
             return 2
+        }else if section == 1{
+            return 3
         }else{ //return 3 if circle or grid that is not hidden
             return 4
         }
