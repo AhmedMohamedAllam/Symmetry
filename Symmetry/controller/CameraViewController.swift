@@ -232,12 +232,7 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
         }
         // To handle video
         if let videoUrl = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? NSURL{
-            let asset = AVURLAsset(url: videoUrl as URL)
-            let duration = asset.duration.seconds
-            VideoCrop.suqareCropVideo(inputURL: videoUrl, seconds: duration) { croppedUrl in
-                self.mediaStore.saveVideo(with: videoUrl as URL)
-            }
-            //            UISaveVideoAtPathToSavedPhotosAlbum(videoPath, self, nil, nil)
+            saveVideo(with: videoUrl)
         }
         
         picker.dismiss(animated: false) {
@@ -247,7 +242,18 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
     }
     
     
-    
+    private func saveVideo(with videoUrl: NSURL){
+        let isSquare = UserDefaults.standard.bool(forKey: SettingsKeys.isSquared.rawValue)
+        if isSquare{
+            let asset = AVURLAsset(url: videoUrl as URL)
+            let duration = asset.duration.seconds
+            try? VideoCrop.suqareCropVideo(seconds: duration, videoUrl: videoUrl) { croppedUrl in
+                self.mediaStore.saveVideo(with: videoUrl as URL)
+            }
+        }else{
+            self.mediaStore.saveVideo(with: videoUrl as URL)
+        }
+    }
     
     private func presentAlertController(
         with viewController: UIViewController,
