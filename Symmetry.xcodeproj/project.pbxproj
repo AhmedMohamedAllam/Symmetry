@@ -17,6 +17,7 @@
 		F90B465322134BF000AE4515 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B464F22134BF000AE4515 /* GridView.swift */; };
 		F90B465422134BF000AE4515 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465022134BF000AE4515 /* OverlayView.swift */; };
 		F90B465622134C2100AE4515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B465522134C2100AE4515 /* AppDelegate.swift */; };
+		F91E63242296F386004E4730 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91E63232296F385004E4730 /* GradientView.swift */; };
 		F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C2224FB2C500C6BDEF /* Preferences.swift */; };
 		F93B21C52250028000C6BDEF /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21C42250028000C6BDEF /* ColorsViewController.swift */; };
 		F93B21CB2250E02800C6BDEF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B21CA2250E02800C6BDEF /* Extensions.swift */; };
@@ -48,6 +49,7 @@
 		F90B464F22134BF000AE4515 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		F90B465022134BF000AE4515 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		F90B465522134C2100AE4515 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F91E63232296F385004E4730 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F93B21C2224FB2C500C6BDEF /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		F93B21C42250028000C6BDEF /* ColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		F93B21CA2250E02800C6BDEF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				F90B465022134BF000AE4515 /* OverlayView.swift */,
 				F990C08F2252B5950062A17A /* RecordCounterView.swift */,
 				F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */,
+				F91E63232296F385004E4730 /* GradientView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				F990C0902252B5950062A17A /* MediaStore.swift in Sources */,
 				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
 				F990C0952252B5950062A17A /* CameraViewController.swift in Sources */,
+				F91E63242296F386004E4730 /* GradientView.swift in Sources */,
 				F93B21C52250028000C6BDEF /* ColorsViewController.swift in Sources */,
 				F93B21CB2250E02800C6BDEF /* Extensions.swift in Sources */,
 				F90B465322134BF000AE4515 /* GridView.swift in Sources */,

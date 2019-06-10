@@ -32,15 +32,18 @@ extension UIImage{
     func squareImage() -> UIImage{
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
-        let width = self.size.width
-        let height = self.size.height
-        let ratio = screenWidth/width
-        
+
+        let originalImageWidth = self.size.width
+        let originalImageHeight = self.size.height
+        let ratio = screenWidth/originalImageWidth
+        let imageHeightInScreen = ratio * originalImageHeight
+
+        let differenceBetweenTopAndStartOfImage = (screenHeight - imageHeightInScreen) / 2
         UIGraphicsBeginImageContextWithOptions(CGSize(width: screenWidth, height: screenWidth), false, 0.0)
         let ctx = UIGraphicsGetCurrentContext()!
-        let y = ((screenWidth - screenHeight) * 0.5)
+        let y = ((screenWidth - imageHeightInScreen - differenceBetweenTopAndStartOfImage) * 0.5)
         ctx.translateBy(x: 0,y: y)
-        self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: screenWidth, height: height * ratio)))
+        self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: screenWidth, height: imageHeightInScreen)))
         
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

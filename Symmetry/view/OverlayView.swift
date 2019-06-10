@@ -12,6 +12,7 @@ protocol OverLayViewDelegate {
 }
 
 let overlayViewTag = 1000
+let settingsButtonTag = 2000
 
 class OverlayView{
     var delegate: OverLayViewDelegate?
@@ -74,10 +75,15 @@ class OverlayView{
     }
     
     private func  addLowerAndUpperViews(to view: UIView){
+        let isSquare = UserDefaults.standard.bool(forKey: SettingsKeys.isSquared.rawValue)
+        guard isSquare else {
+            return
+        }
         //the upper and lower part in the case of sqare images
         let upperView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
         let lowerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
-        
+//        upperView.setGradientBackground(topToBottom: true)
+//        lowerView.setGradientBackground(topToBottom: false)
         upperView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         lowerView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         
@@ -94,7 +100,7 @@ class OverlayView{
         let dimensions = squareDimensions(from: view.frame)
         
         NSLayoutConstraint.activate([
-            upperView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            upperView.topAnchor.constraint(equalTo: view.topAnchor),
             upperView.heightAnchor.constraint(equalToConstant: dimensions["y"]!),
             upperView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             upperView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -115,6 +121,7 @@ class OverlayView{
         
         // add settings button on uper right
         let button = UIButton(frame: CGRect(x: settingIconPosition.x, y: settingIconPosition.y, width: settingIconSize, height: settingIconSize))
+        button.tag = settingsButtonTag
         button.setImage(#imageLiteral(resourceName: "settings"), for: .normal)
         button.addTarget(self, action: #selector(settingButtonAction(_:)), for: .touchUpInside)
         overlayView.addSubview(button)

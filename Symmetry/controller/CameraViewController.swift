@@ -73,9 +73,9 @@ class CameraViewController: UIViewController {
             return
         }
         
-        if let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: imagePicker.sourceType){
-            imagePicker.mediaTypes = availableMediaTypes
-        }
+//        if let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: imagePicker.sourceType){
+//            imagePicker.mediaTypes = availableMediaTypes
+//        }
         let rect = getRectAfterOrientation(rect: cameraRect)
         let overlayView = overlay.getOverlayView(frame: rect)
         imagePicker.cameraOverlayView = overlayView
@@ -122,14 +122,25 @@ class CameraViewController: UIViewController {
     private func removeOverlayAfterTakePhoto(from imagePicker: UIImagePickerController){
         NotificationCenter.default.addObserver(forName: NSNotification.Name.didCaptureItem, object:nil, queue:nil, using: {[weak self] note in
             self?.didCapture = true
-            imagePicker.cameraOverlayView = nil
+            imagePicker.cameraOverlayView?.isUserInteractionEnabled = false
+            self?.removeOverlayDrawingsAfterTakePhoto()
         })
+    }
+    
+    private func removeOverlayDrawingsAfterTakePhoto(){
+        let subviews = imagePicker.cameraOverlayView?.subviews
+        subviews?.forEach{
+            if $0.tag == overlayViewTag || $0.tag == settingsButtonTag{
+                $0.removeFromSuperview()
+            }
+        }
     }
     
     private func addOverlayAfterRejectPhoto(from imagePicker: UIImagePickerController){
         NotificationCenter.default.addObserver(forName: NSNotification.Name.didRejectItem, object:nil, queue:nil, using: {[weak self] note in
             guard let self = self else {return}
             self.didCapture = false
+            imagePicker.cameraOverlayView?.isUserInteractionEnabled = true
             imagePicker.cameraOverlayView = self.overlay.getOverlayView(frame: self.cameraRect)
         })
     }
@@ -243,16 +254,7 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
     
     
     private func saveVideo(with videoUrl: NSURL){
-        let isSquare = UserDefaults.standard.bool(forKey: SettingsKeys.isSquared.rawValue)
-        if isSquare{
-            let asset = AVURLAsset(url: videoUrl as URL)
-            let duration = asset.duration.seconds
-            try? VideoCrop.suqareCropVideo(seconds: duration, videoUrl: videoUrl) { croppedUrl in
-                self.mediaStore.saveVideo(with: videoUrl as URL)
-            }
-        }else{
-            self.mediaStore.saveVideo(with: videoUrl as URL)
-        }
+        self.mediaStore.saveVideo(from: videoUrl as URL)
     }
     
     private func presentAlertController(
