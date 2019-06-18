@@ -13,38 +13,23 @@ import Photos
 class CameraViewController: UIViewController {
     
     let defaults = UserDefaults.standard
+    var flashMode = CameraFlashMode.auto
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    var overlay: OverlayView!
     var appName: String = Constants.appName
-    lazy var cameraRect: CGRect = {
-        return getRectAfterOrientation(rect: self.imagePicker.view.frame)
-    }()
-    
-    var didCapture = false
-    var previousOrientation: UIDeviceOrientation = .portrait
+    var cameraControlsView: CameraControlsView!
     var mediaStore: MediaStore!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mediaStore = MediaStore(viewController: self)
-        overlay = OverlayView(delegate: self)
-        addDidChangeOverlaySettingsObserver()
-        addDidChangeOrientationObserver()
         openCamera()
+        updateOverlayView()
+        saveStatusBarHeight()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        didCapture = false
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-    }
-    
-    @objc func settingButtonAction(_ sender: UIButton!) {
-        let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController{
-            imagePicker.pushViewController(settingsViewController, animated: true)
-        }
     }
     
     
@@ -64,6 +49,23 @@ class CameraViewController: UIViewController {
         }
     }
     
+    
+    private func saveStatusBarHeight() {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        UserDefaults.standard.set(statusBarHeight, forKey: "statusBarHeight")
+    }
+    
+    private func changeFlashMode(with newFlashMode: CameraFlashMode){
+        switch newFlashMode {
+        case .off:
+            imagePicker.cameraFlashMode = .off
+        case .auto:
+            imagePicker.cameraFlashMode = .auto
+        case .on:
+            imagePicker.cameraFlashMode = .on
+        }
+    }
+    
     private func setupCamera(){
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -76,13 +78,22 @@ class CameraViewController: UIViewController {
 //        if let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: imagePicker.sourceType){
 //            imagePicker.mediaTypes = availableMediaTypes
 //        }
-        let rect = getRectAfterOrientation(rect: cameraRect)
-        let overlayView = overlay.getOverlayView(frame: rect)
-        imagePicker.cameraOverlayView = overlayView
+        
+        imagePicker.cameraOverlayView = cameraControlsView
         imagePicker.delegate = self
         imagePicker.videoQuality = .typeHigh
-        removeOverlayAfterTakePhoto(from: imagePicker)
-        addOverlayAfterRejectPhoto(from: imagePicker)
+        imagePicker.showsCameraControls = false
+        translateCaptureViewToCenter()
+    }
+    
+    
+    private func translateCaptureViewToCenter() {
+        let screenHeight = UIScreen.main.bounds.size.height
+        let screenWidth = UIScreen.main.bounds.size.width
+        let imageHeight = screenWidth * (4/3)
+        let headerHeight = (screenHeight - imageHeight) / 2
+        let translate: CGAffineTransform = CGAffineTransform(translationX: 0.0, y: headerHeight)
+        imagePicker.cameraViewTransform = translate
     }
     
     //Mark: - Camera Authorization
@@ -118,40 +129,6 @@ class CameraViewController: UIViewController {
         }
     }
     
-    //    MARK:- Notification Observers
-    private func removeOverlayAfterTakePhoto(from imagePicker: UIImagePickerController){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.didCaptureItem, object:nil, queue:nil, using: {[weak self] note in
-            self?.didCapture = true
-            imagePicker.cameraOverlayView?.isUserInteractionEnabled = false
-            self?.removeOverlayDrawingsAfterTakePhoto()
-        })
-    }
-    
-    private func removeOverlayDrawingsAfterTakePhoto(){
-        let subviews = imagePicker.cameraOverlayView?.subviews
-        subviews?.forEach{
-            if $0.tag == overlayViewTag || $0.tag == settingsButtonTag{
-                $0.removeFromSuperview()
-            }
-        }
-    }
-    
-    private func addOverlayAfterRejectPhoto(from imagePicker: UIImagePickerController){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.didRejectItem, object:nil, queue:nil, using: {[weak self] note in
-            guard let self = self else {return}
-            self.didCapture = false
-            imagePicker.cameraOverlayView?.isUserInteractionEnabled = true
-            imagePicker.cameraOverlayView = self.overlay.getOverlayView(frame: self.cameraRect)
-        })
-    }
-    
-    private func addDidChangeOverlaySettingsObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.didChangeOverlaySettings(_:)), name: NSNotification.Name.didChangeOverlaySettings, object: nil)
-    }
-    
-    private func addDidChangeOrientationObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(didChangeOrientation(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
     
     // will be executed if user tab done button in settings
     @objc func didChangeOverlaySettings(_ notification:Notification){
@@ -159,68 +136,13 @@ class CameraViewController: UIViewController {
     }
     
     @objc func didChangeOrientation(_ notification:Notification){
-        if !didCapture{
             updateOverlayView()
-        }
     }
-    
-    private func isPortrait() -> Bool{
-        var isPortrait: Bool {
-            let orientation = UIDevice.current.orientation
-            switch orientation {
-            case .portrait, .portraitUpsideDown:
-                previousOrientation = .portrait
-                return true
-            case .landscapeLeft, .landscapeRight:
-                previousOrientation = .landscapeLeft
-                return false
-            default: // unknown or faceUp or faceDown
-                //                guard let window = self.view.window else { return false }
-                //                return window.frame.size.width < window.frame.size.height
-                if previousOrientation == .portrait{
-                    return true
-                }else{
-                    return false
-                }
-            }
-        }
-        
-        return isPortrait
-    }
-    
-    
-    private func getRectAfterOrientation(rect: CGRect) -> CGRect{
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            // It's an iPhone
-            return rect
-        case .pad:
-            var width: CGFloat = 0.0
-            var height: CGFloat = 0.0
-            
-            if isPortrait(){
-                width = (rect.width > rect.height) ? rect.height : rect.width
-                height = (rect.width > rect.height) ? rect.width : rect.height
-            }else{
-                width = (rect.width > rect.height) ? rect.width : rect.height
-                height = (rect.width > rect.height) ? rect.height : rect.width
-            }
-            return CGRect(x: 0.0, y: 0.0, width: width, height: height)
-        default:
-            return rect
-        }
-        
-    }
-    
     
     private func updateOverlayView(){
-        let deviceHasCamera = UIImagePickerController.isSourceTypeAvailable(.camera)
-        guard deviceHasCamera else {
-            return
-        }
-        let rect = getRectAfterOrientation(rect: cameraRect)
-        let overlayView =  overlay.getOverlayView(frame: rect)
-        imagePicker.cameraOverlayView = overlayView
+        cameraControlsView = CameraControlsView.loadFromNib()
+        cameraControlsView.delegate = self
+        imagePicker.cameraOverlayView = cameraControlsView
     }
     
 }
@@ -232,7 +154,6 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        didCapture = false
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         
@@ -246,12 +167,20 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
             saveVideo(with: videoUrl)
         }
         
-        picker.dismiss(animated: false) {
-            self.didCapture = false
-            self.openCamera()
-        }
+//        picker.dismiss(animated: false) {
+//            self.openCamera()
+//        }
     }
     
+    // Helper function inserted by Swift 4.2 migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    }
+    
+    // Helper function inserted by Swift 4.2 migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+        return input.rawValue
+    }
     
     private func saveVideo(with videoUrl: NSURL){
         self.mediaStore.saveVideo(from: videoUrl as URL)
@@ -273,25 +202,33 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
     }
 }
 
-extension CameraViewController: OverLayViewDelegate{
+extension CameraViewController: CameraControlsViewDelegate{
+    func didPressFlashButton(newFlashMode: CameraFlashMode) {
+        changeFlashMode(with: newFlashMode)
+    }
+    
+    func didPressCaptureButton() {
+        imagePicker.takePicture()
+    }
+    
+    func didPressSwitchCamButton() {
+        let currentCam = imagePicker.cameraDevice
+        imagePicker.cameraDevice = currentCam == .rear ? .front : .rear
+    }
+    
+    
     func didPressSettingsButton() {
         let mainStroyboard = UIStoryboard(name: "Main", bundle: nil)
         let settingsViewController = mainStroyboard.instantiateViewController(withIdentifier: SettingsTableViewController.storyboardID) as? SettingsTableViewController
         settingsViewController?.delegate = self
         imagePicker.pushViewController(settingsViewController!, animated: true)
     }
+    
+    
 }
 
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-    return input.rawValue
-}
 
 extension CameraViewController: SettingsTableViewControllerDelegate {
     func didChangeSettings(){

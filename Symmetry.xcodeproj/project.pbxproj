@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		28CF5D81721DE44098E0998E /* Pods_Symmetry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F032B479C80C38CB6BE52EDF /* Pods_Symmetry.framework */; };
+		F905751C22B6FB0E00EF0F4D /* CaptureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F905751B22B6FB0E00EF0F4D /* CaptureButton.swift */; };
+		F905751E22B6FF1300EF0F4D /* CameraControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F905751D22B6FF1300EF0F4D /* CameraControlsView.xib */; };
+		F905752022B7016700EF0F4D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F905751F22B7016700EF0F4D /* UIView+Extension.swift */; };
+		F905752222B702AC00EF0F4D /* CameraControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F905752122B702AC00EF0F4D /* CameraControlsView.swift */; };
 		F90B462F221345FC00AE4515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F90B462D221345FC00AE4515 /* LaunchScreen.storyboard */; };
 		F90B46372213470000AE4515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F90B46362213470000AE4515 /* Main.storyboard */; };
 		F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90B46412213489500AE4515 /* OverlayViewConfiguration.swift */; };
@@ -38,6 +42,10 @@
 		0FCE8E7003B90CB07A9AE6CA /* Pods-Symmetry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Symmetry.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry.debug.xcconfig"; sourceTree = "<group>"; };
 		EDE3B00FBC04C1B9FFCC7C21 /* Pods-Symmetry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Symmetry.release.xcconfig"; path = "Pods/Target Support Files/Pods-Symmetry/Pods-Symmetry.release.xcconfig"; sourceTree = "<group>"; };
 		F032B479C80C38CB6BE52EDF /* Pods_Symmetry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Symmetry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F905751B22B6FB0E00EF0F4D /* CaptureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureButton.swift; sourceTree = "<group>"; };
+		F905751D22B6FF1300EF0F4D /* CameraControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraControlsView.xib; sourceTree = "<group>"; };
+		F905751F22B7016700EF0F4D /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		F905752122B702AC00EF0F4D /* CameraControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControlsView.swift; sourceTree = "<group>"; };
 		F90B4621221345FB00AE4515 /* Symmetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Symmetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90B462E221345FC00AE4515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F90B4630221345FC00AE4515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +103,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F905752322B702C100EF0F4D /* camera controls view */ = {
+			isa = PBXGroup;
+			children = (
+				F905751D22B6FF1300EF0F4D /* CameraControlsView.xib */,
+				F905752122B702AC00EF0F4D /* CameraControlsView.swift */,
+			);
+			path = "camera controls view";
+			sourceTree = "<group>";
+		};
 		F90B4618221345FB00AE4515 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +149,7 @@
 		F90B46382213475B00AE4515 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				F905752322B702C100EF0F4D /* camera controls view */,
 				F90B464E22134BF000AE4515 /* CircleView.swift */,
 				F90B464F22134BF000AE4515 /* GridView.swift */,
 				F9901FEF22202FBF009B57F3 /* CellCoordinate.swift */,
@@ -139,6 +157,7 @@
 				F990C08F2252B5950062A17A /* RecordCounterView.swift */,
 				F90B464D22134BF000AE4515 /* RoundedCorenerView.swift */,
 				F91E63232296F385004E4730 /* GradientView.swift */,
+				F905751B22B6FB0E00EF0F4D /* CaptureButton.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -177,6 +196,7 @@
 		F9FD9FA2221812ED00A64C49 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				F905751F22B7016700EF0F4D /* UIView+Extension.swift */,
 				F90B465522134C2100AE4515 /* AppDelegate.swift */,
 				F93B21CA2250E02800C6BDEF /* Extensions.swift */,
 				F9FD9FA0221812BE00A64C49 /* Constants.swift */,
@@ -249,6 +269,7 @@
 				F90B462F221345FC00AE4515 /* LaunchScreen.storyboard in Resources */,
 				F990C09D2252C4AC0062A17A /* Assets.xcassets in Resources */,
 				F90B46372213470000AE4515 /* Main.storyboard in Resources */,
+				F905751E22B6FF1300EF0F4D /* CameraControlsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,9 +333,12 @@
 				F90B465222134BF000AE4515 /* CircleView.swift in Sources */,
 				F90B465422134BF000AE4515 /* OverlayView.swift in Sources */,
 				F9E798C42290594500AB0E65 /* VideoCrop.swift in Sources */,
+				F905751C22B6FB0E00EF0F4D /* CaptureButton.swift in Sources */,
 				F90B46422213489500AE4515 /* OverlayViewConfiguration.swift in Sources */,
 				F93B21C3224FB2C500C6BDEF /* Preferences.swift in Sources */,
 				F990C0902252B5950062A17A /* MediaStore.swift in Sources */,
+				F905752022B7016700EF0F4D /* UIView+Extension.swift in Sources */,
+				F905752222B702AC00EF0F4D /* CameraControlsView.swift in Sources */,
 				F90B465122134BF000AE4515 /* RoundedCorenerView.swift in Sources */,
 				F990C0952252B5950062A17A /* CameraViewController.swift in Sources */,
 				F91E63242296F386004E4730 /* GradientView.swift in Sources */,
@@ -395,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -450,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

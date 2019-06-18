@@ -37,11 +37,11 @@ extension UIImage{
         let originalImageHeight = self.size.height
         let ratio = screenWidth/originalImageWidth
         let imageHeightInScreen = ratio * originalImageHeight
-
-        let differenceBetweenTopAndStartOfImage = (screenHeight - imageHeightInScreen) / 2
+        let statusBarHeight = CGFloat(UserDefaults.standard.float(forKey: "statusBarHeight"))
+        let differenceBetweenTopAndStartOfImage = (screenHeight - imageHeightInScreen) / 2 - statusBarHeight
         UIGraphicsBeginImageContextWithOptions(CGSize(width: screenWidth, height: screenWidth), false, 0.0)
         let ctx = UIGraphicsGetCurrentContext()!
-        let y = ((screenWidth - imageHeightInScreen - differenceBetweenTopAndStartOfImage) * 0.5)
+        let y = (-1 * differenceBetweenTopAndStartOfImage)
         ctx.translateBy(x: 0,y: y)
         self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: screenWidth, height: imageHeightInScreen)))
         
@@ -69,4 +69,46 @@ extension Notification.Name{
     static let didChangeOverlaySettings = NSNotification.Name(rawValue: "settingsDidChange")
     static let didCaptureItem =  NSNotification.Name(rawValue: "_UIImagePickerControllerUserDidCaptureItem")
     static let didRejectItem =  NSNotification.Name(rawValue: "_UIImagePickerControllerUserDidRejectItem")
+}
+
+extension NSLayoutConstraint {
+    /**
+     Change multiplier constraint
+     
+     - parameter multiplier: CGFloat
+     - returns: NSLayoutConstraint
+     */
+    @discardableResult func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
+        
+        NSLayoutConstraint.deactivate([self])
+        
+        let newConstraint = NSLayoutConstraint(
+            item: firstItem,
+            attribute: firstAttribute,
+            relatedBy: relation,
+            toItem: secondItem,
+            attribute: secondAttribute,
+            multiplier: multiplier,
+            constant: constant)
+        
+        newConstraint.priority = priority
+        newConstraint.shouldBeArchived = self.shouldBeArchived
+        newConstraint.identifier = self.identifier
+        
+        NSLayoutConstraint.activate([newConstraint])
+        return newConstraint
+    }
+}
+
+extension UIView {
+    class func loadFromNib<T>(withName nibName: String) -> T? {
+        let nib  = UINib.init(nibName: nibName, bundle: nil)
+        let nibObjects = nib.instantiate(withOwner: nil, options: nil)
+        for object in nibObjects {
+            if let result = object as? T {
+                return result
+            }
+        }
+        return nil
+    }
 }
