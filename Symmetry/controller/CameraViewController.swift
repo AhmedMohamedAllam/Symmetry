@@ -160,6 +160,7 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
         
         // To handle image
         if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
+            cameraControlsView.updateGalleryImageView(with: image)
             mediaStore.savePhoto(image)
         }
         // To handle video

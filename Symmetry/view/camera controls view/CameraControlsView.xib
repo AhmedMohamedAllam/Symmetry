@@ -129,21 +129,21 @@
                                 <action selector="didPressSwitchCamButton:" destination="kDi-lI-cCS" eventType="touchUpInside" id="iO3-8z-iPh"/>
                             </connections>
                         </button>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gallery" translatesAutoresizingMaskIntoConstraints="NO" id="rwZ-mL-hzg">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gallery" translatesAutoresizingMaskIntoConstraints="NO" id="rwZ-mL-hzg">
                             <rect key="frame" x="16" y="17.5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="SO7-3j-hNi"/>
                                 <constraint firstAttribute="width" secondItem="rwZ-mL-hzg" secondAttribute="height" multiplier="1:1" id="XNr-gk-255"/>
                             </constraints>
                         </imageView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXd-Qu-iT8">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXd-Qu-iT8">
                             <rect key="frame" x="16" y="17.5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="da3-dB-5O1"/>
                                 <constraint firstAttribute="width" constant="40" id="lVF-Iy-07Z"/>
                             </constraints>
                             <connections>
-                                <action selector="didPressSwitchCamButton:" destination="kDi-lI-cCS" eventType="touchUpInside" id="YsC-Yw-2m0"/>
+                                <action selector="didPressGalleryButton:" destination="kDi-lI-cCS" eventType="touchUpInside" id="aK6-aG-n49"/>
                             </connections>
                         </button>
                     </subviews>

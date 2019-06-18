@@ -48,10 +48,17 @@ class CameraControlsView: UIView {
         return view
     }
     
+    func updateGalleryImageView(with image : UIImage) {
+        galleryImageView.image = image
+    }
     
     //MARK:- Actions
     @IBAction func didPressSettingsButton(_ sender: Any) {
         delegate?.didPressSettingsButton()
+    }
+    
+    @IBAction func didPressGalleryButton(_ sender: Any) {
+        UIApplication.shared.open(URL(string:"photos-redirect://")!)
     }
     
     @IBAction func didPressFlashButton(_ sender: Any) {

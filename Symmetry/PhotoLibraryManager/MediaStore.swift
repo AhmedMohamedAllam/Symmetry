@@ -31,6 +31,7 @@ class MediaStore {
         self.libraryManager.savePhotoToAlbum(albumName: self.appName, photo: newImage){ identifier, error in
             print(identifier ?? "no identifier", error?.localizedDescription ?? "no error")
         }
+        
     }
     
     
