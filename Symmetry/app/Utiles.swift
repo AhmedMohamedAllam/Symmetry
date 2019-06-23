@@ -36,4 +36,12 @@ class Utiles {
         }
     }
     
+    static func frameAfterRotate() -> CGRect {
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+        let actualWidth = width < height ? width : height
+        let actualHeight = width < height ? height : width
+        return CGRect(x: 0, y: 0, width: actualWidth, height: actualHeight)
+    }
+    
 }

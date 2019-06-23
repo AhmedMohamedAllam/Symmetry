@@ -39,9 +39,11 @@ class CameraControlsView: UIView {
     class func loadFromNib() -> CameraControlsView? {
         let view: CameraControlsView = self.loadFromNib(withName: "CameraControlsView")!
         view.translatesAutoresizingMaskIntoConstraints = false
+       
+        let windowFrame = Utiles.frameAfterRotate()
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width),
-            view.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+            view.widthAnchor.constraint(equalToConstant: windowFrame.width),
+            view.heightAnchor.constraint(equalToConstant: windowFrame.height)
             ])
         view.addOverlayShape()
         configureSquare(for: view)

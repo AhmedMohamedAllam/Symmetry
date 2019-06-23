@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Photos
+import CoreMotion
 
 class CameraViewController: UIViewController {
     
@@ -18,7 +19,8 @@ class CameraViewController: UIViewController {
     var appName: String = Constants.appName
     var cameraControlsView: CameraControlsView!
     var mediaStore: MediaStore!
-    
+    var uMM: CMMotionManager!
+    var previousOrientation = UIDevice.current.orientation
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +30,15 @@ class CameraViewController: UIViewController {
         saveStatusBarHeight()
     }
     
+   
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
+    
+   
+    
     
     
     //    MARK- Camera Configuration
@@ -86,6 +94,26 @@ class CameraViewController: UIViewController {
         translateCaptureViewToCenter()
     }
     
+
+    
+    @objc func deviceRotated(){
+        switch UIDevice.current.orientation{
+        case .portrait, .portraitUpsideDown:
+            changeShouldRotate(false)
+        case .landscapeLeft:
+            changeShouldRotate(true)
+        case .landscapeRight:
+            changeShouldRotate(true)
+        default:
+            print("default")
+        }
+      
+    }
+    
+    private func changeShouldRotate(_ bool: Bool){
+        UserDefaults.standard.set(bool, forKey: "shouldRotate")
+        updateOverlayView()
+    }
     
     private func translateCaptureViewToCenter() {
         let screenHeight = UIScreen.main.bounds.size.height
