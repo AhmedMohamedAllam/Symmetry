@@ -54,7 +54,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="VGj-6q-vUW" secondAttribute="trailing" constant="16" id="13R-bx-9Yy"/>
                         <constraint firstItem="VGj-6q-vUW" firstAttribute="centerY" secondItem="5SN-V1-fwE" secondAttribute="centerY" id="2rN-IO-oGX"/>
@@ -147,7 +147,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="WXd-Qu-iT8" firstAttribute="centerX" secondItem="rwZ-mL-hzg" secondAttribute="centerX" id="MZO-MX-uYB"/>
                         <constraint firstItem="4uA-x0-O8R" firstAttribute="centerY" secondItem="F4i-hf-5RY" secondAttribute="centerY" id="RYi-N3-REa"/>
