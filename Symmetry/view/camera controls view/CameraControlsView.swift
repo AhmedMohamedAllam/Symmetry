@@ -28,6 +28,7 @@ class CameraControlsView: UIView {
     private var overlay: OverlayView!
     private var flashMode = CameraFlashMode.auto
     var delegate: CameraControlsViewDelegate?
+    static var previousOrientation = UIDevice.current.orientation
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -40,7 +41,8 @@ class CameraControlsView: UIView {
         let view: CameraControlsView = self.loadFromNib(withName: "CameraControlsView")!
         view.translatesAutoresizingMaskIntoConstraints = false
        
-        let windowFrame = Utiles.frameAfterRotate()
+        let windowFrame = getRectAfterOrientation(rect: view.frame)
+        
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: windowFrame.width),
             view.heightAnchor.constraint(equalToConstant: windowFrame.height)
@@ -49,6 +51,45 @@ class CameraControlsView: UIView {
         configureSquare(for: view)
         return view
     }
+    
+    private static func isPortrait() -> Bool{
+        let orientation = UIDevice.current.orientation
+        switch orientation {
+        case .portrait, .portraitUpsideDown:
+            previousOrientation = .portrait
+            return true
+        case .landscapeLeft, .landscapeRight:
+            previousOrientation = .landscapeLeft
+            return false
+        default: // unknown or faceUp or faceDown
+            return previousOrientation == .portrait
+        }
+    }
+    
+    
+    private static func getRectAfterOrientation(rect: CGRect) -> CGRect{
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            // It's an iPhone
+            return rect
+        case .pad:
+            var width: CGFloat = 0.0
+            var height: CGFloat = 0.0
+            
+            if isPortrait(){
+                width = (rect.width > rect.height) ? rect.height : rect.width
+                height = (rect.width > rect.height) ? rect.width : rect.height
+            }else{
+                width = (rect.width > rect.height) ? rect.width : rect.height
+                height = (rect.width > rect.height) ? rect.height : rect.width
+            }
+            return CGRect(x: 0.0, y: 0.0, width: width, height: height)
+        default:
+            return rect
+        }
+        
+    }
+    
     
     func updateGalleryImageView(with image : UIImage) {
         galleryImageView.image = image
@@ -109,7 +150,8 @@ class CameraControlsView: UIView {
     }
     
     private func addOverlayShape(){
-        let overlayShape = OverlayView.overlayShape(with: previewView.bounds)
+        let previewBounds = CameraControlsView.getRectAfterOrientation(rect: previewView.bounds)
+        let overlayShape = OverlayView.overlayShape(with: previewBounds)
         overlayShape.translatesAutoresizingMaskIntoConstraints = false
         previewView.addSubview(overlayShape)
         

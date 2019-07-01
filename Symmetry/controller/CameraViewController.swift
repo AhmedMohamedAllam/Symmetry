@@ -22,6 +22,8 @@ class CameraViewController: UIViewController {
     var uMM: CMMotionManager!
     var previousOrientation = UIDevice.current.orientation
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mediaStore = MediaStore(viewController: self)
@@ -57,6 +59,7 @@ class CameraViewController: UIViewController {
         }
     }
     
+   
     
     private func saveStatusBarHeight() {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
