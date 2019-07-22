@@ -40,8 +40,7 @@ class CameraControlsView: UIView {
     class func loadFromNib() -> CameraControlsView? {
         let view: CameraControlsView = self.loadFromNib(withName: "CameraControlsView")!
         view.translatesAutoresizingMaskIntoConstraints = false
-       
-        let windowFrame = getRectAfterOrientation(rect: view.frame)
+        let windowFrame = getRectAfterOrientation(rect: UIScreen.main.bounds)
         
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: windowFrame.width),
@@ -67,7 +66,7 @@ class CameraControlsView: UIView {
     }
     
     
-    private static func getRectAfterOrientation(rect: CGRect) -> CGRect{
+    static func getRectAfterOrientation(rect: CGRect) -> CGRect{
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             // It's an iPhone

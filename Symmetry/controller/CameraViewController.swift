@@ -119,8 +119,9 @@ class CameraViewController: UIViewController {
     }
     
     private func translateCaptureViewToCenter() {
-        let screenHeight = UIScreen.main.bounds.size.height
-        let screenWidth = UIScreen.main.bounds.size.width
+        let windowFrame = Utiles.frameAfterRotate()
+        let screenHeight = windowFrame.height
+        let screenWidth = windowFrame.width
         let imageHeight = screenWidth * (4/3)
         let headerHeight = (screenHeight - imageHeight) / 2
         let translate: CGAffineTransform = CGAffineTransform(translationX: 0.0, y: headerHeight)
@@ -176,6 +177,10 @@ class CameraViewController: UIViewController {
         imagePicker.cameraOverlayView = cameraControlsView
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        updateOverlayView()
+    }
 }
 
 extension CameraViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
