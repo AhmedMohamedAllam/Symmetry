@@ -40,7 +40,7 @@ class CameraControlsView: UIView {
     class func loadFromNib() -> CameraControlsView? {
         let view: CameraControlsView = self.loadFromNib(withName: "CameraControlsView")!
         view.translatesAutoresizingMaskIntoConstraints = false
-        let windowFrame = getRectAfterOrientation(rect: UIScreen.main.bounds)
+        let windowFrame = UIScreen.main.bounds
         
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: windowFrame.width),
@@ -149,18 +149,60 @@ class CameraControlsView: UIView {
     }
     
     private func addOverlayShape(){
-        let previewBounds = CameraControlsView.getRectAfterOrientation(rect: previewView.bounds)
+        var previewBounds = Utiles.frameAfterRotate()
+        let isSquare = UserDefaults.standard.bool(forKey: SettingsKeys.isSquared.rawValue)
+        if isSquare{
+            previewBounds.size.height = previewBounds.width
+        }
         let overlayShape = OverlayView.overlayShape(with: previewBounds)
         overlayShape.translatesAutoresizingMaskIntoConstraints = false
         previewView.addSubview(overlayShape)
+        if isSquare{
+            
+            let leadingView = createSurroundingView()
+            let trailingView = createSurroundingView()
+            let topView = createSurroundingView()
+            let bottomView = createSurroundingView()
+            
+            //add four bblack views to surround the shape in square mode
+            NSLayoutConstraint.activate([
+                leadingView.trailingAnchor.constraint(equalTo: overlayShape.leadingAnchor),
+                trailingView.leadingAnchor.constraint(equalTo: overlayShape.trailingAnchor),
+                topView.bottomAnchor.constraint(equalTo: overlayShape.topAnchor),
+                bottomView.topAnchor.constraint(equalTo: overlayShape.bottomAnchor),            
+                ])
+            NSLayoutConstraint.activate([
+                overlayShape.widthAnchor.constraint(equalToConstant: previewBounds.width),
+                overlayShape.heightAnchor.constraint(equalToConstant: previewBounds.height),
+                overlayShape.centerXAnchor.constraint(equalTo: previewView.centerXAnchor),
+                overlayShape.centerYAnchor.constraint(equalTo: previewView.centerYAnchor)
+                ])
+        }else{
+            NSLayoutConstraint.activate([
+                overlayShape.widthAnchor.constraint(equalTo: previewView.widthAnchor),
+                overlayShape.heightAnchor.constraint(equalTo: previewView.heightAnchor),
+                overlayShape.centerXAnchor.constraint(equalTo: previewView.centerXAnchor),
+                overlayShape.centerYAnchor.constraint(equalTo: previewView.centerYAnchor)
+                ])
+        }
+       
+    }
+    
+    //create black view to surround the shapeView in square mode
+    private func createSurroundingView() -> UIView{
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let previewFrame = Utiles.frameAfterRotate()
         
         NSLayoutConstraint.activate([
-            overlayShape.widthAnchor.constraint(equalTo: previewView.widthAnchor),
-            overlayShape.heightAnchor.constraint(equalTo: previewView.heightAnchor),
-            overlayShape.centerXAnchor.constraint(equalTo: previewView.centerXAnchor),
-            overlayShape.centerYAnchor.constraint(equalTo: previewView.centerYAnchor)
+            view.heightAnchor.constraint(equalToConstant: previewFrame.height),
+            view.widthAnchor.constraint(equalToConstant: previewFrame.height),
             ])
+        previewView.addSubview(view)
+        return view
     }
+    
     
     private static func configureSquare(for view: CameraControlsView){
         let isSquare =  UserDefaults.standard.bool(forKey: SettingsKeys.isSquared.rawValue)

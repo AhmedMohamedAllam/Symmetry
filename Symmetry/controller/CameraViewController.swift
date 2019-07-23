@@ -36,7 +36,6 @@ class CameraViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
    
@@ -98,26 +97,7 @@ class CameraViewController: UIViewController {
     }
     
 
-    
-    @objc func deviceRotated(){
-        switch UIDevice.current.orientation{
-        case .portrait, .portraitUpsideDown:
-            changeShouldRotate(false)
-        case .landscapeLeft:
-            changeShouldRotate(true)
-        case .landscapeRight:
-            changeShouldRotate(true)
-        default:
-            print("default")
-        }
-      
-    }
-    
-    private func changeShouldRotate(_ bool: Bool){
-        UserDefaults.standard.set(bool, forKey: "shouldRotate")
-        updateOverlayView()
-    }
-    
+   
     private func translateCaptureViewToCenter() {
         let windowFrame = Utiles.frameAfterRotate()
         let screenHeight = windowFrame.height

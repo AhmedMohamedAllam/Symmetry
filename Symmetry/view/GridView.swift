@@ -24,7 +24,6 @@ import UIKit
     }
     
     func configureViewFromUserDefaults() {
-        let shouldRotate = UserDefaults.standard.bool(forKey: "shouldRotate")
         let lineWidth = CGFloat(defaults.integer(forKey: SettingsKeys.lineWidth.rawValue))
         self.lineWidth = lineWidth > 0 ? lineWidth : 1.0
         self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .white
@@ -32,9 +31,6 @@ import UIKit
         self.numberOfColumns = columns > 0 ? columns : 3
         let rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)
         self.numberOfRows = rows > 0 ? rows : 3
-        if shouldRotate {
-            swap(&numberOfRows, &numberOfColumns)
-        }
         backgroundColor = UIColor.clear
     }
     

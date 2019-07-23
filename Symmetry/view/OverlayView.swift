@@ -30,12 +30,4 @@ class OverlayView{
         return isGrid ? OverlayShape.grid : OverlayShape.circle
     }
     
-    static func swapNumberOfRowsAndColumns(){
-        let defaults = UserDefaults.standard
-        let columns = defaults.integer(forKey: SettingsKeys.numberOfColumns.rawValue)
-        let rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)
-        
-        defaults.set(rows, forKey: SettingsKeys.numberOfColumns.rawValue)
-        defaults.set(columns, forKey: SettingsKeys.numberOfRows.rawValue)
-    }
 }
