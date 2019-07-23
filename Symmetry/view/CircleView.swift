@@ -29,7 +29,7 @@ class CircleView: UIView{
     func configureViewFromUserDefaults() {
         let lineWidth = CGFloat(defaults.integer(forKey: SettingsKeys.lineWidth.rawValue))
         self.lineWidth = lineWidth > 0 ? lineWidth : 1.0
-        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .white
+        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .yellow
         
         let numberOfCircles = defaults.integer(forKey: SettingsKeys.numberOfCircles.rawValue)
         self.numberOfCircles = numberOfCircles > 0 ? numberOfCircles : 5

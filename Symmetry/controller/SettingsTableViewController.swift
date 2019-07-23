@@ -75,7 +75,7 @@ class SettingsTableViewController: UITableViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "colorPopUpSegue", let colorVC = segue.destination as? ColorsViewController{
             colorVC.delegate = self
-            colorVC.previousColor = lineColorView.backgroundColor ?? .white
+            colorVC.previousColor = lineColorView.backgroundColor ?? .yellow
         }
     }
 

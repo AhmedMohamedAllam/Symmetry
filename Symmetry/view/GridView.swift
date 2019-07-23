@@ -26,7 +26,7 @@ import UIKit
     func configureViewFromUserDefaults() {
         let lineWidth = CGFloat(defaults.integer(forKey: SettingsKeys.lineWidth.rawValue))
         self.lineWidth = lineWidth > 0 ? lineWidth : 1.0
-        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .white
+        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .yellow
         let columns = defaults.integer(forKey: SettingsKeys.numberOfColumns.rawValue)
         self.numberOfColumns = columns > 0 ? columns : 3
         let rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)
