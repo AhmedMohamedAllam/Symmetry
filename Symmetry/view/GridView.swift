@@ -13,8 +13,8 @@ import UIKit
     let defaults = UserDefaults.standard
     var gridCellNumber: CellCoordinate!
     
-    @IBInspectable var numberOfColumns: Int = 2
-    @IBInspectable var numberOfRows: Int = 2
+    @IBInspectable var numberOfColumns: Int = 7
+    @IBInspectable var numberOfRows: Int = 9
     @IBInspectable var lineWidth: CGFloat = 1.0
     @IBInspectable var lineColor: UIColor = UIColor.white
     @IBInspectable var transperency: CGFloat = 1.0 {
@@ -26,11 +26,11 @@ import UIKit
     func configureViewFromUserDefaults() {
         let lineWidth = CGFloat(defaults.integer(forKey: SettingsKeys.lineWidth.rawValue))
         self.lineWidth = lineWidth > 0 ? lineWidth : 1.0
-        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .yellow
+        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) 
         let columns = defaults.integer(forKey: SettingsKeys.numberOfColumns.rawValue)
-        self.numberOfColumns = columns > 0 ? columns : 3
+        self.numberOfColumns = columns > 0 ? columns : 7
         let rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)
-        self.numberOfRows = rows > 0 ? rows : 3
+        self.numberOfRows = rows > 0 ? rows : 9
         backgroundColor = UIColor.clear
     }
     
@@ -134,8 +134,8 @@ import UIKit
     }
     
     private func addHorizontalCellNumbers(index: Int, x: CGFloat, columnWidth: CGFloat){
-        let isGridNumbersShown = defaults.bool(forKey: SettingsKeys.showGridNumbers.rawValue)
-        guard isGridNumbersShown else {
+        let isGridNumbersShown = defaults.value(forKey: SettingsKeys.showGridNumbers.rawValue) as? Bool
+        guard isGridNumbersShown ?? true else {
             return
         }
         let number = gridCellNumber.horizontalNumbers [index]
@@ -148,8 +148,8 @@ import UIKit
     }
     
     private func addVetictalCellNumbers(index: Int, y: CGFloat, rowHeight: CGFloat){
-        let isGridNumbersShown = defaults.bool(forKey: SettingsKeys.showGridNumbers.rawValue)
-        guard isGridNumbersShown else {
+        let isGridNumbersShown = defaults.value(forKey: SettingsKeys.showGridNumbers.rawValue) as? Bool
+        guard isGridNumbersShown ?? true else {
             return
         }
         let number = gridCellNumber.verticalNumbers[index]

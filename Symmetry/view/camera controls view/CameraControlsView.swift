@@ -191,7 +191,7 @@ class CameraControlsView: UIView {
     //create black view to surround the shapeView in square mode
     private func createSurroundingView() -> UIView{
         let view = UIView(frame: .zero)
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         view.translatesAutoresizingMaskIntoConstraints = false
         let previewFrame = Utiles.frameAfterRotate()
         

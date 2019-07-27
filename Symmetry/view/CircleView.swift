@@ -29,7 +29,7 @@ class CircleView: UIView{
     func configureViewFromUserDefaults() {
         let lineWidth = CGFloat(defaults.integer(forKey: SettingsKeys.lineWidth.rawValue))
         self.lineWidth = lineWidth > 0 ? lineWidth : 1.0
-        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) ?? .yellow
+        self.lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue) 
         
         let numberOfCircles = defaults.integer(forKey: SettingsKeys.numberOfCircles.rawValue)
         self.numberOfCircles = numberOfCircles > 0 ? numberOfCircles : 5
@@ -159,8 +159,9 @@ class CircleView: UIView{
     }
     
     private func addHorizontalCellNumbers(index: Int, radius: CGFloat){
-        let isCircleNumbersShown = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
-        guard isCircleNumbersShown else {
+        let isCircleNumbersShown = defaults.value(forKey: SettingsKeys.showCircleNumbers.rawValue) as? Bool
+        
+        guard isCircleNumbersShown ?? true else {
             return
         }
         let number = gridCellNumber.horizontalNumbers [index]
@@ -174,8 +175,8 @@ class CircleView: UIView{
     }
     
     private func addVetictalCellNumbers(index: Int, radius: CGFloat){
-        let isCircleNumbersShown = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
-        guard isCircleNumbersShown else {
+        let isCircleNumbersShown = defaults.value(forKey: SettingsKeys.showCircleNumbers.rawValue) as? Bool
+        guard isCircleNumbersShown ?? true else {
             return
         }
         let number = gridCellNumber.verticalNumbers[index]

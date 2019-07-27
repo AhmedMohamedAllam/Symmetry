@@ -26,7 +26,7 @@ class OverlayView{
     }
     
     private static func getOverlayShapeChoiseFromDefaults() -> OverlayShape{
-        let isGrid = UserDefaults.standard.bool(forKey: SettingsKeys.isGrid.rawValue)
+        let isGrid = (UserDefaults.standard.value(forKey: SettingsKeys.isGrid.rawValue) as? Bool) ?? true
         return isGrid ? OverlayShape.grid : OverlayShape.circle
     }
     

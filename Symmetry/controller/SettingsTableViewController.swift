@@ -81,22 +81,22 @@ class SettingsTableViewController: UITableViewController{
 
     // Configure previous settings and configure current setting views with them
     func configureSettingStartWithUserDefaults() {
-        isGridSelected = defaults.bool(forKey: SettingsKeys.isGrid.rawValue)
+        isGridSelected = (defaults.value(forKey: SettingsKeys.isGrid.rawValue) as? Bool) ?? true
         
         var lineWidth = defaults.integer(forKey: SettingsKeys.lineWidth.rawValue)
         lineWidth = lineWidth > 0 ? lineWidth : 1
         let lineColor = defaults.color(forKey: SettingsKeys.lineColor.rawValue)
         var columns = defaults.integer(forKey: SettingsKeys.numberOfColumns.rawValue)
-        columns = columns > 0 ? columns : 3
+        columns = columns > 0 ? columns : 7
         var rows = defaults.integer(forKey: SettingsKeys.numberOfRows.rawValue)
-        rows = rows > 0 ? rows : 3
+        rows = rows > 0 ? rows : 9
         var circles = defaults.integer(forKey: SettingsKeys.numberOfCircles.rawValue)
         circles = circles > 0 ? circles : 5
         let centeredDashedLines = defaults.bool(forKey: SettingsKeys.showCenteredDashedLines.rawValue)
         let crossedLines = defaults.bool(forKey: SettingsKeys.showCrossLines.rawValue)
         let gridDashedLines = defaults.bool(forKey: SettingsKeys.showDashedLines.rawValue)
-        let gridNumbers = defaults.bool(forKey: SettingsKeys.showGridNumbers.rawValue)
-        let circleNumbers = defaults.bool(forKey: SettingsKeys.showCircleNumbers.rawValue)
+        let gridNumbers = (defaults.value(forKey: SettingsKeys.showGridNumbers.rawValue) as? Bool) ?? true
+        let circleNumbers = (defaults.value(forKey: SettingsKeys.showCircleNumbers.rawValue) as? Bool) ?? true
         let isSquared = defaults.bool(forKey: SettingsKeys.isSquared.rawValue)
         
         
@@ -160,7 +160,7 @@ class SettingsTableViewController: UITableViewController{
     //Mark: - overlay choices (grid or circle)
     // put checkmark on user previous choise
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let isGrid = defaults.bool(forKey: SettingsKeys.isGrid.rawValue)
+        let isGrid = (defaults.value(forKey: SettingsKeys.isGrid.rawValue) as? Bool) ?? true
         if let identifier = cell.reuseIdentifier{
             switch identifier{
             case "gridCell":
